@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SeaBattle.View"
         mc:Ignorable="d"
-        Title="Game" Height="300" Width="300">
+        Title="Game" Height="300" Width="600">
     <Grid>
         
     </Grid>

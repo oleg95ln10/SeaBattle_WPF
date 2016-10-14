@@ -61,10 +61,17 @@
     <Compile Include="View\Game.xaml.cs">
       <DependentUpon>Game.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\LeaderTable.xaml.cs">
+      <DependentUpon>LeaderTable.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\TabOfLeaders.xaml.cs">
       <DependentUpon>TabOfLeaders.xaml</DependentUpon>
     </Compile>
     <Page Include="View\Game.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\LeaderTable.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -5,8 +5,22 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SeaBattle"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
-    <Grid>
-        
+        Title="Sea battle" Height="350" Width="525">
+    <Window.Resources>
+        <Style x:Key="BigFontButtonStyle">
+            <Setter Property="Control.FontFamily" Value="Times New Roman" />
+            <Setter Property="Control.FontSize" Value="18" />
+            <Setter Property="Control.FontWeight" Value="Bold" />
+        </Style>
+        <Style x:Key="EmphasizedBigFontButtonStyle" BasedOn="{StaticResource BigFontButtonStyle}">
+            <Setter Property="Control.Foreground" Value="White" />
+            <Setter Property="Control.Background" Value="DarkBlue" />
+        </Style>
+    </Window.Resources>
+    <Grid Background="#FF12AACE">
+        <Label FontSize="50" HorizontalAlignment="Center" Foreground="Pink">Sea battle</Label>
+        <Button Margin="145,92,144.4,161.4" Content="New game" FontSize="35" Click="Button_Click" Style="{StaticResource EmphasizedBigFontButtonStyle}" ></Button>
+        <Button Margin="145,182,144.4,71.4" Content="View leaders" FontSize="35" Click="Button_Click_1" Style="{StaticResource EmphasizedBigFontButtonStyle}" />
+
     </Grid>
 </Window>

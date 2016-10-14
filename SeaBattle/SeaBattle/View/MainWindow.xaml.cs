@@ -1,4 +1,5 @@
-﻿using SeaBattle.ViewModel;
+﻿using SeaBattle.View;
+using SeaBattle.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,6 +28,28 @@ namespace SeaBattle
 
             DataContext = new MainViewModel();
 
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            this.Visibility = Visibility.Collapsed;
+            Game g = new Game();
+            g.Closed += (sender2, e2) =>
+            {
+                this.Visibility = Visibility.Visible;
+            };
+            g.ShowDialog();
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            this.Visibility = Visibility.Collapsed;
+            LeaderTable lt = new LeaderTable();
+            lt.Closed += (sender2, e2) =>
+            {
+                this.Visibility = Visibility.Visible;
+            };
+            lt.ShowDialog();
         }
     }
 }
