@@ -64,6 +64,9 @@
     <Compile Include="View\LeaderTable.xaml.cs">
       <DependentUpon>LeaderTable.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\PreGameWindow.xaml.cs">
+      <DependentUpon>PreGameWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\TabOfLeaders.xaml.cs">
       <DependentUpon>TabOfLeaders.xaml</DependentUpon>
     </Compile>
@@ -91,6 +94,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\PreGameWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\TabOfLeaders.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

@@ -33,12 +33,12 @@ namespace SeaBattle
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             this.Visibility = Visibility.Collapsed;
-            Game g = new Game();
-            g.Closed += (sender2, e2) =>
+            PreGameWindow pg = new PreGameWindow();
+            pg.Closed += (sender2, e2) =>
             {
                 this.Visibility = Visibility.Visible;
             };
-            g.ShowDialog();
+            pg.ShowDialog();
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
