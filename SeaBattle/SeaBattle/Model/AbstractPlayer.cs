@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SeaBattle.Models
 {
-    class Player
+    abstract class AbstractPlayer
     {
         String Name
         {
@@ -18,15 +18,21 @@ namespace SeaBattle.Models
             get { return Score; }
             set { Score = value; }
         }
-        int [,] Field
+        int[,] OwnField
         {
-            get { return Field; }
-            set { Field = value; }
+            get { return OwnField; }
+            set { OwnField = value; }
+        }
+        int[,] OpponentField
+        {
+            get { return OpponentField; }
+            set { OpponentField = value; }
         }
         List<Ship> Ships { get; set; }
-        public Player()
+        public AbstractPlayer()
         {
-            Field = new int[10, 10];
+            OwnField = new int[10, 10];
+            OpponentField = new int[10, 10];
             Ships = new List<Ship>();
             Ships.Capacity = 10;
         }
