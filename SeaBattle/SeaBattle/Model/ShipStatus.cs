@@ -4,7 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SeaBattle.Models
+namespace SeaBattle.Model
 {
-    enum TypesOfShips { First, Second, Third, Fourth };
+    enum ShipStatus
+    {
+        Live,
+        Enjured,
+        Killed
+    }
 }

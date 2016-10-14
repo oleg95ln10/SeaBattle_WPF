@@ -4,37 +4,61 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SeaBattle.Models
+namespace SeaBattle.Model
 {
     abstract class AbstractPlayer
     {
-        String Name
+        #region Properties
+        private String name;
+        private int score;
+        private int[,] ownField;
+        private int[,] opponentField;
+        private List<Ship> ships;
+        #endregion
+        public int[,] OwnField
         {
-            get { return Name; }
-            set { Name = value; }
+            get { return ownField; }
+            set { ownField = value;}
         }
-        int Score
+        public int[,] OpponentField
         {
-            get { return Score; }
-            set { Score = value; }
+            get { return opponentField; }
+            set { opponentField = value;}
         }
-        int[,] OwnField
+
+        public int Score
         {
-            get { return OwnField; }
-            set { OwnField = value; }
+            get { return score; }
+            set { score = value;}
         }
-        int[,] OpponentField
+        public string Name
         {
-            get { return OpponentField; }
-            set { OpponentField = value; }
+            get { return name; }
+            set { name = value;}
         }
-        List<Ship> Ships { get; set; }
+        public List<Ship> Ships
+        {
+            get { return ships; }
+            set { ships = value; }
+        }
         public AbstractPlayer()
         {
             OwnField = new int[10, 10];
             OpponentField = new int[10, 10];
             Ships = new List<Ship>();
             Ships.Capacity = 10;
+            AddShips();
+        }
+        private void AddShips()
+        {
+            //локальный массив с количеством разнопалубных кораблей
+            int []arr = { 1, 1, 1, 1, 2, 2, 2, 3, 3, 4 };
+
+            for (int i = 0; i < 10; ++i)
+            {
+                TypeOfShips t = (TypeOfShips)arr[i];
+                Ships.Add(new Ship { Type = t, Status = ShipStatus.Live });
+            }
         }
     }
 }

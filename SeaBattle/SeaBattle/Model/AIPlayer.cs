@@ -6,11 +6,12 @@ using System.Threading.Tasks;
 
 namespace SeaBattle.Model
 {
-    class Player : AbstractPlayer
+    class AIPlayer : AbstractPlayer
     {
-        public Player()
+        public AIPlayer()
             : base()
         {
+
         }
     }
 }

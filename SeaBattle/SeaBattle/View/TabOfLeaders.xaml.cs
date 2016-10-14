@@ -1,5 +1,4 @@
-﻿using SeaBattle.ViewModel;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,22 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace SeaBattle
+namespace SeaBattle.View
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for TabOfLeaders.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class TabOfLeaders : Window
     {
-        public MainWindow()
+        public TabOfLeaders()
         {
             InitializeComponent();
-
-            DataContext = new MainViewModel();
-
         }
     }
 }
