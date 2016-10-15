@@ -53,6 +53,13 @@ namespace SeaBattle.View
 
         private void canvas_MouseEnter(object sender, MouseEventArgs e)
         {
+            lab.Content = " ";
+            lab.Content = e.GetPosition(this);
+            
+        }
+
+        private void canvas_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
 
         }
     }

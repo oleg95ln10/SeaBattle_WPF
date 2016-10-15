@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:SeaBattle.View"
         mc:Ignorable="d"
         Title="PreGameWindow" Height="400" Width="400">
-    <Canvas Name="canvas" MouseEnter="canvas_MouseEnter">
-        <Label Name="lab" Canvas.Left="236" Canvas.Top="120" Height="90" Width="148"></Label>
+    <Canvas Name="canvas" MouseEnter="canvas_MouseEnter" MouseLeftButtonDown="canvas_MouseLeftButtonDown">
+        <Label Name="lab" Canvas.Left="305" Canvas.Top="114" Height="90" Width="148"></Label>
     </Canvas>
 </Window>
