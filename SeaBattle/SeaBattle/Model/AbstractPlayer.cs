@@ -8,51 +8,43 @@ namespace SeaBattle.Model
 {
     abstract class AbstractPlayer
     {
+        private String _name;
+        private int _score;
+        private List<Ship> _ships;
+        private Field _field;
+        public AbstractPlayer()
+        {
+            _ships = new List<Ship>();
+            _ships.Capacity = 10;
+            AddShips();
+            _field = new Field();
+        }
         #region Properties
-        private String name;
-        private int score;
-        private int[,] ownField;
-        private int[,] opponentField;
-        private List<Ship> ships;
-        #endregion
-        public int[,] OwnField
-        {
-            get { return ownField; }
-            set { ownField = value;}
-        }
-        public int[,] OpponentField
-        {
-            get { return opponentField; }
-            set { opponentField = value;}
-        }
-
         public int Score
         {
-            get { return score; }
-            set { score = value;}
+            get { return _score; }
+            set { _score = value;}
         }
         public string Name
         {
-            get { return name; }
-            set { name = value;}
+            get { return _name; }
+            set { _name = value;}
         }
         public List<Ship> Ships
         {
-            get { return ships; }
-            set { ships = value; }
+            get { return _ships; }
+            set { _ships = value; }
         }
-        public AbstractPlayer()
+        public Field Field
         {
-            OwnField = new int[10, 10];
-            OpponentField = new int[10, 10];
-            Ships = new List<Ship>();
-            Ships.Capacity = 10;
-            AddShips();
+            get { return _field; }
+            set { _field = value;}
         }
+        #endregion
         private void AddShips()
         {
             //локальный массив с количеством разнопалубных кораблей
-            int []arr = { 1, 1, 1, 1, 2, 2, 2, 3, 3, 4 };
+            int [] arr = { 1, 1, 1, 1, 2, 2, 2, 3, 3, 4 };
 
             for (int i = 0; i < 10; ++i)
             {
