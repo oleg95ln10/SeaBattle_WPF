@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SeaBattle.Model
 {
-    class Ship
+    public class Ship
     {
         private TypeOfShips type;
         private ShipStatus status;

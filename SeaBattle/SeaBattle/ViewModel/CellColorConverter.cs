@@ -4,12 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SeaBattle.Model
+namespace SeaBattle.ViewModel
 {
-    public enum ShipStatus
+    public static class CellColorConverter
     {
-        Live,
-        Enjured,
-        Killed
     }
 }

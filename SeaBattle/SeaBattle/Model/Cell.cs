@@ -3,11 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace SeaBattle.Model
 {
-    class Cell
+    enum CellType { Unknown, Water, Undamaged, Damaged, Sunk }
+    public class Cell : DependencyObject
     {
+        public static readonly DependencyProperty TypeProperty =
+            DependencyProperty.Register("Type", typeof(CellType), typeof(Cell), null);
         public static readonly int CellSize = 20;
         /// <summary>
         /// 0 - Пусто

@@ -1,4 +1,5 @@
-﻿using SeaBattle.View;
+﻿using SeaBattle.Model;
+using SeaBattle.View;
 using SeaBattle.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -22,18 +23,20 @@ namespace SeaBattle
     /// </summary>
     public partial class MainWindow : Window
     {
+        MainViewModel _model;
         public MainWindow()
         {
             InitializeComponent();
 
-            DataContext = new MainViewModel();
-
+            _model = new MainViewModel();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             this.Visibility = Visibility.Collapsed;
-            PreGameWindow pg = new PreGameWindow();
+            AbstractPlayer player = _model.FirstPlayer;
+            PreGameWindow pg = new PreGameWindow(ref player);
+            _model.FirstPlayer = player;
             pg.Closed += (sender2, e2) =>
             {
                 this.Visibility = Visibility.Visible;

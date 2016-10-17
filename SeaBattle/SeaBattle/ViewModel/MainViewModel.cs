@@ -9,13 +9,24 @@ namespace SeaBattle.ViewModel
 {
     class MainViewModel
     {
-        Player p1;
-        Player p2;
+        AbstractPlayer _firstPlayer;
+        AbstractPlayer _secondPlayer;
 
         public MainViewModel()
         {
-            p1 = new Player();
-            p2 = new Player();
+            _firstPlayer = new Player();
+            _secondPlayer = new Player();
+        }
+
+        public AbstractPlayer FirstPlayer
+        {
+            get { return _firstPlayer; }
+            set {_firstPlayer = value; }
+        }
+        public AbstractPlayer SecondPlayer
+        {
+            get {return _secondPlayer; }
+            set {_secondPlayer = value; }
         }
     }
 }

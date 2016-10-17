@@ -9,7 +9,7 @@ namespace SeaBattle.Model
     /// <summary>
     /// Корабли в зависимости от количества палуб
     /// </summary>
-    enum TypeOfShips
+    public enum TypeOfShips
     {
         First = 1,
         Second,

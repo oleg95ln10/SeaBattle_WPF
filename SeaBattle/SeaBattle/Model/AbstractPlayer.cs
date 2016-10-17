@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SeaBattle.Model
 {
-    abstract class AbstractPlayer
+    public abstract class AbstractPlayer
     {
         private String _name;
         private int _score;

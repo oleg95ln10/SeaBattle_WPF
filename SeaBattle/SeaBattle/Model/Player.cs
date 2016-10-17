@@ -12,5 +12,9 @@ namespace SeaBattle.Model
             : base()
         {
         }
+        public void PlaceShips()
+        {
+
+        }
     }
 }

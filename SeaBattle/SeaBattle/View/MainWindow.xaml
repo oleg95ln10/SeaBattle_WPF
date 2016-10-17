@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SeaBattle"
         mc:Ignorable="d"
-        Title="Sea battle" Height="350" Width="525">
+        Title="Sea battle" Height="350" Width="525" ResizeMode="NoResize">
     <Window.Resources>
         <Style x:Key="BigFontButtonStyle">
             <Setter Property="Control.FontFamily" Value="Times New Roman" />

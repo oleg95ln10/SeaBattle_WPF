@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SeaBattle.Model
 {
-    class Field
+    public class Field
     {
         private Cell [,] _cells;
         public Field()

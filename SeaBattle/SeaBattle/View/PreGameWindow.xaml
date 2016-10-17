@@ -5,8 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SeaBattle.View"
         mc:Ignorable="d"
-        Title="PreGameWindow" Height="400" Width="400">
-    <Canvas Name="canvas" MouseEnter="canvas_MouseEnter" MouseLeftButtonDown="canvas_MouseLeftButtonDown">
-        <Label Name="lab" Canvas.Left="305" Canvas.Top="114" Height="90" Width="148"></Label>
-    </Canvas>
+        Title="PreGameWindow" Height="400" Width="400" ResizeMode="NoResize">
+    <Grid>
+        <local:FieldControl x:Name="fieldController" PreviewMouseLeftButtonDown="Gsd_PreviewMouseLeftButtonDown" Margin="5,0,0,116" HorizontalAlignment="Left" Width="258"/>
+        <Label Margin="268,10,-0.4,326" Content="Choose ships for put:"/>
+    </Grid>
+
 </Window>
