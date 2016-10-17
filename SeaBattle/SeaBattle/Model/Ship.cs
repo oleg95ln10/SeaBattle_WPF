@@ -10,7 +10,6 @@ namespace SeaBattle.Model
     {
         private TypeOfShips type;
         private ShipStatus status;
-
         public TypeOfShips Type
         {
             get { return type; }

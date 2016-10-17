@@ -34,7 +34,7 @@ namespace SeaBattle
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             this.Visibility = Visibility.Collapsed;
-            AbstractPlayer player = _model.FirstPlayer;
+            Player player = _model.FirstPlayer;
             PreGameWindow pg = new PreGameWindow(ref player);
             _model.FirstPlayer = player;
             pg.Closed += (sender2, e2) =>

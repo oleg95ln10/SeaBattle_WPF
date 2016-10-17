@@ -5,10 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SeaBattle.View"
         mc:Ignorable="d"
-        Title="PreGameWindow" Height="400" Width="400" ResizeMode="NoResize">
-    <Grid>
-        <local:FieldControl x:Name="fieldController" PreviewMouseLeftButtonDown="Gsd_PreviewMouseLeftButtonDown" Margin="5,0,0,116" HorizontalAlignment="Left" Width="258"/>
+        Title="PreGameWindow" Height="400" Width="411.2" ResizeMode="NoResize">
+    <Grid HorizontalAlignment="Left" Margin="0,0,-0.4,0" Width="394">
+        <local:FieldControl x:Name="fieldController" PreviewMouseLeftButtonDown="FieldController_PreviewMouseLeftButtonDown" Margin="5,0,0,116" HorizontalAlignment="Left" Width="258"/>
         <Label Margin="268,10,-0.4,326" Content="Choose ships for put:"/>
+        <Label Margin="268,51,0,285" Name="fourthClassShipLabel" Content="Fourth class ship" MouseLeftButtonDown="FourthClassShipLabel_MouseLeftButtonDown"/>
+        <Label Margin="268,87,0,249" Name="thirdClassShipLabel" Content="Third class ship" MouseLeftButtonDown="ThirdClassShipLabel_MouseLeftButtonDown"/>
+        <Label Margin="268,123,0,213" Name="secondClassShipLabel" Content="Second class ship" MouseLeftButtonDown="SecondClassShipLabel_MouseLeftButtonDown"/>
+        <Label Margin="268,159,0,177" Name="firstClassShipLabel" Content="First class ship" MouseLeftButtonDown="FirstClassShipLabel_MouseLeftButtonDown"/>
     </Grid>
 
 </Window>

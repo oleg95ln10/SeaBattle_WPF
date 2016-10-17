@@ -9,7 +9,7 @@ namespace SeaBattle.ViewModel
 {
     class MainViewModel
     {
-        AbstractPlayer _firstPlayer;
+        Player _firstPlayer;
         AbstractPlayer _secondPlayer;
 
         public MainViewModel()
@@ -18,7 +18,7 @@ namespace SeaBattle.ViewModel
             _secondPlayer = new Player();
         }
 
-        public AbstractPlayer FirstPlayer
+        public Player FirstPlayer
         {
             get { return _firstPlayer; }
             set {_firstPlayer = value; }
