@@ -22,10 +22,18 @@ namespace SeaBattle.View
     {
         private Player _player;
         private int _selectedShipLenght;
-        private int[] _shipArray = { 1, 1, 1, 1, 2, 2, 2, 3, 3, 4 };
+        private TypeOfShips _selectedShipType;
+        private Label _selectedShipLabel;
+        private List<int> _shipList;
         public PreGameWindow(ref Player player)
         {
             InitializeComponent();
+            _shipList = new List<int>();
+            for (int i = 0; i < 10; ++i)
+            {
+                TypeOfShips t = (TypeOfShips)AbstractPlayer.ShipArray[i];
+                _shipList.Add((int)t);
+            }
             this._player = player;
         }
 
@@ -35,33 +43,52 @@ namespace SeaBattle.View
             var x = (int)mousePosition.X / 25;
             var y = (int)mousePosition.Y / 25;
             var numbOfCell = x + y * 10;
-            if (numbOfCell<100 && _selectedShipLenght>0 && _player.IsShipCanPut(x,y))
+            if (numbOfCell<100 && _selectedShipLenght>0 && _player.IsPuttedShipNotDiagonal(x,y) && _player.IsShipCanPut(x, y))
             {
                 Button currentButton = (Button)fieldController.canvas.Children[numbOfCell];
                 _player.PlaceShips(x,y,_selectedShipLenght);
                 currentButton.Background = Brushes.Red;
                 _selectedShipLenght--;
+                var f = (int)_selectedShipType;
             }
+            if (_selectedShipLenght == 0)
+            {
+                _shipList.Remove((int)_selectedShipType);
+                if (!IsShipConsist())
+                    _selectedShipLabel.Content = null;
+            }
+
         }
 
         private void FourthClassShipLabel_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            _selectedShipLenght = 4;
+            GetShip(TypeOfShips.Fourth,fourthClassShipLabel);
         }
-
         private void ThirdClassShipLabel_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            _selectedShipLenght = 3;
+            GetShip(TypeOfShips.Third,thirdClassShipLabel);
         }
-
         private void SecondClassShipLabel_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            _selectedShipLenght = 2;
+            GetShip(TypeOfShips.Second,secondClassShipLabel);
         }
-
         private void FirstClassShipLabel_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            _selectedShipLenght = 1;
+            GetShip(TypeOfShips.First,firstClassShipLabel);
+        }
+        private void GetShip(TypeOfShips selectedShipTye, Label shipLabel)
+        {
+            _selectedShipType = selectedShipTye;
+
+            if (IsShipConsist())
+            {
+                _selectedShipLenght = (int)selectedShipTye;
+                _selectedShipLabel = shipLabel;
+            }
+        }
+        private bool IsShipConsist()
+        {
+            return _shipList.Contains((int)_selectedShipType);
         }
     }
 }

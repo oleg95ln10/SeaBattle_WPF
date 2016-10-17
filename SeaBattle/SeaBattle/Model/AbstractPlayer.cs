@@ -12,6 +12,7 @@ namespace SeaBattle.Model
         private int _score;
         private List<Ship> _ships;
         private Field _field;
+        public static int[] ShipArray = { 1, 1, 1, 1, 2, 2, 2, 3, 3, 4 };
         public AbstractPlayer()
         {
             _ships = new List<Ship>();
@@ -43,12 +44,9 @@ namespace SeaBattle.Model
         #endregion
         private void AddShips()
         {
-            //локальный массив с количеством разнопалубных кораблей
-            int [] arr = { 1, 1, 1, 1, 2, 2, 2, 3, 3, 4 };
-
             for (int i = 0; i < 10; ++i)
             {
-                TypeOfShips t = (TypeOfShips)arr[i];
+                TypeOfShips t = (TypeOfShips)ShipArray[i];
                 Ships.Add(new Ship { Type = t, Status = ShipStatus.Live });
             }
         }
