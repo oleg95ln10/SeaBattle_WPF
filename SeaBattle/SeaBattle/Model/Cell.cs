@@ -9,7 +9,7 @@ namespace SeaBattle.Model
 {
     public class Cell : DependencyObject
     {
-        public static readonly int CellSize = 20;
+        public static readonly int CellSize = 25;
         /// <summary>
         /// -1 - недостижимое поле
         /// 0 - Пусто, Можно ставить корабль

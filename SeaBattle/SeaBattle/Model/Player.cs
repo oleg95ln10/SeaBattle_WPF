@@ -36,6 +36,12 @@ namespace SeaBattle.Model
             _previousRow = row;
             return result;
         }
+        /// <summary>
+        /// Функция не работает
+        /// </summary>
+        /// <param name="row"></param>
+        /// <param name="column"></param>
+        /// <returns></returns>
         public bool IsPuttedShipNotDiagonal(int row, int column)
         {
             bool isChangedRow, IsChangedColumn;

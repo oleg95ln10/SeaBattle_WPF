@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SeaBattle.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Text;
@@ -33,10 +34,10 @@ namespace SeaBattle.View
             {
                 for (int j = 0; j < 10; ++j)
                 {
-                    _cells[i, j] = new Button() { Width = 25, Height = 25 };
+                    _cells[i, j] = new Button() { Width = Cell.CellSize, Height = Cell.CellSize };
                     _cells[i, j].Name = "button_" + i.ToString() + j.ToString();
-                    Canvas.SetLeft(_cells[i, j], 0 + j * 25);
-                    Canvas.SetTop(_cells[i, j], 0 + i * 25);
+                    Canvas.SetLeft(_cells[i, j], 0 + j * Cell.CellSize);
+                    Canvas.SetTop(_cells[i, j], 0 + i * Cell.CellSize);
                     canvas.Children.Add(_cells[i, j]);
                 }
             }

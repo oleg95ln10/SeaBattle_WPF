@@ -40,8 +40,8 @@ namespace SeaBattle.View
         private void FieldController_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             var mousePosition = e.GetPosition(this);
-            var x = (int)mousePosition.X / 25;
-            var y = (int)mousePosition.Y / 25;
+            var x = (int)mousePosition.X / Cell.CellSize;
+            var y = (int)mousePosition.Y / Cell.CellSize;
             var numbOfCell = x + y * 10;
             if (numbOfCell<100 && _selectedShipLenght>0 && _player.IsPuttedShipNotDiagonal(x,y) && _player.IsShipCanPut(x, y))
             {
@@ -49,7 +49,6 @@ namespace SeaBattle.View
                 _player.PlaceShips(x,y,_selectedShipLenght);
                 currentButton.Background = Brushes.Red;
                 _selectedShipLenght--;
-                var f = (int)_selectedShipType;
             }
             if (_selectedShipLenght == 0)
             {
@@ -57,9 +56,7 @@ namespace SeaBattle.View
                 if (!IsShipConsist())
                     _selectedShipLabel.Content = null;
             }
-
         }
-
         private void FourthClassShipLabel_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             GetShip(TypeOfShips.Fourth,fourthClassShipLabel);
