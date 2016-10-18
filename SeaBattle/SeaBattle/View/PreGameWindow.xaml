@@ -6,13 +6,14 @@
         xmlns:local="clr-namespace:SeaBattle.View"
         mc:Ignorable="d"
         Title="PreGameWindow" Height="400" Width="411.2" ResizeMode="NoResize">
-    <Grid HorizontalAlignment="Left" Margin="0,0,-0.4,0" Width="394">
-        <local:FieldControl x:Name="fieldController" PreviewMouseLeftButtonDown="FieldController_PreviewMouseLeftButtonDown" Margin="5,0,0,116" HorizontalAlignment="Left" Width="258"/>
-        <Label Margin="268,10,-0.4,326" Content="Choose ships for put:"/>
-        <Label Margin="268,51,0,285" Name="fourthClassShipLabel" Content="Fourth class ship" MouseLeftButtonDown="FourthClassShipLabel_MouseLeftButtonDown"/>
-        <Label Margin="268,87,0,249" Name="thirdClassShipLabel" Content="Third class ship" MouseLeftButtonDown="ThirdClassShipLabel_MouseLeftButtonDown"/>
-        <Label Margin="268,123,0,213" Name="secondClassShipLabel" Content="Second class ship" MouseLeftButtonDown="SecondClassShipLabel_MouseLeftButtonDown"/>
-        <Label Margin="268,159,0,177" Name="firstClassShipLabel" Content="First class ship" MouseLeftButtonDown="FirstClassShipLabel_MouseLeftButtonDown"/>
-    </Grid>
+    <Canvas HorizontalAlignment="Left" Margin="0,0,-0.4,0" Width="394" Background="#FF12AACE">
+        <local:FieldControl x:Name="fieldController" HorizontalAlignment="Left" Width="258" Height="250" Canvas.Left="5"/>
+        <Label Content="Choose ships for put:" Name="lab1" Canvas.Left="262"/>
+        <Button Name="ship" PreviewMouseLeftButtonDown="ship_PreviewMouseLeftButtonDown" PreviewMouseMove="ship_PreviewMouseMove" PreviewMouseUp="ship_PreviewMouseUp" Canvas.Left="268" Canvas.Top="62" RenderTransformOrigin="0.5,0.5">
+        </Button>
+        <Label Name="shipDirection" Content="How to place ship?" Canvas.Left="268" Canvas.Top="158"></Label>
+        <Button Content="Horizontal" Canvas.Left="263" Canvas.Top="189" Width="121" PreviewMouseLeftButtonDown="HorizontalButton_MouseLeftButtonDown"></Button>
+        <Button Content="Vertical" Canvas.Left="263" Canvas.Top="228" Width="121" PreviewMouseLeftButtonDown="VerticalButton_MouseLeftButtonDown"></Button>
+    </Canvas>
 
 </Window>

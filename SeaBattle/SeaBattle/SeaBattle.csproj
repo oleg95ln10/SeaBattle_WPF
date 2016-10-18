@@ -58,6 +58,7 @@
     <Compile Include="Model\AIPlayer.cs" />
     <Compile Include="Model\Cell.cs" />
     <Compile Include="Model\Field.cs" />
+    <Compile Include="ViewModel\ShipDirection.cs" />
     <Compile Include="Model\ShipStatus.cs" />
     <Compile Include="ViewModel\CellColorConverter.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />

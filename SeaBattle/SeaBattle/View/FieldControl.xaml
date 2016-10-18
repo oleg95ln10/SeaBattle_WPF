@@ -6,28 +6,8 @@
              xmlns:local="clr-namespace:SeaBattle.View"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="284.8">
-    <UserControl.Resources>
-        <Style x:Key="HorizontalListBox">
-            <Style.Resources>
-                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="White" />
-            </Style.Resources>
-            <Setter Property="ListBox.ItemsPanel">
-                <Setter.Value>
-                    <ItemsPanelTemplate>
-                        <StackPanel Orientation="Horizontal" />
-                    </ItemsPanelTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-    </UserControl.Resources>
-    <ListBox Name="list" HorizontalAlignment="Left" Width="300">
-        <ListBox.ItemContainerStyle>
-            <Style TargetType="{x:Type ListBoxItem}">              
-            </Style>
-        </ListBox.ItemContainerStyle>
-        <Canvas Name="canvas">
-            
-        </Canvas>
-    </ListBox>
+    <Canvas Name="canvas" Background="#FF12AACE">
+
+    </Canvas>
 
 </UserControl>
