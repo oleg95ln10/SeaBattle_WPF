@@ -37,7 +37,7 @@ namespace SeaBattle.View
             _isCanmove = false;
             _isShipMoving = false;
             this._player = player;
-            _direction = ShipDirection.Horizontal;
+            _direction = ShipDirection.Vertical;
         }
 
         private void FieldController_PreviewMouseLeftButtonDown(object sender)
@@ -108,47 +108,47 @@ namespace SeaBattle.View
                         if (y - 1 >= 0 && x - 1 >= 0)
                         {
                             Button mostUpLeftChildButton = (Button)fieldController.canvas.Children[(x - 1) + (y - 1) * 10];
-                            //mostUpLeftChildButton.Background = Brushes.Yellow;
+                            mostUpLeftChildButton.Background = Brushes.Yellow;
                         }
-                        if (x + _currentShip <= 9 && y - 1 >= 0)
+                        if (x + 1 <= 9 && y - 1 >= 0)
                         {
-                            Button mostUpRightChildButton = (Button)fieldController.canvas.Children[(x + _currentShip) + (y - 1) * 10];
-                            //mostUpRightChildButton.Background = Brushes.Yellow;
+                            Button mostUpRightChildButton = (Button)fieldController.canvas.Children[(x + 1) + (y - 1) * 10];
+                            mostUpRightChildButton.Background = Brushes.Yellow;
                         }
-                        if (x - 1 >= 0 && x - 1 <= 9)
+                        if (y - 1 >= 0)
                         {
-                            Button mostMidleLeftChildButton = (Button)fieldController.canvas.Children[(x - 1) + y * 10];
-                            //mostMidleLeftChildButton.Background = Brushes.Yellow;
+                            Button mostMidleUpperChildButton = (Button)fieldController.canvas.Children[x + ( y - 1 ) * 10];
+                            mostMidleUpperChildButton.Background = Brushes.Yellow;
                         }
-                        if (x + _currentShip <= 9)
+                        if (y + _currentShip <= 9 && x - 1 >= 0)
                         {
-                            Button mostMidleRightChildButton = (Button)fieldController.canvas.Children[(x + _currentShip) + y * 10];
-                            //mostMidleRightChildButton.Background = Brushes.Yellow;
+                            Button mostDownLefChildButton = (Button)fieldController.canvas.Children[(x - 1) + (y + _currentShip) * 10];
+                            mostDownLefChildButton.Background = Brushes.Yellow;
                         }
-                        if (y + 1 <= 9 && x - 1 >= 0)
+                        if (y + _currentShip <= 9)
                         {
-                            Button mostDownLeftChildButton = (Button)fieldController.canvas.Children[(x - 1) + (y + 1) * 10];
-                            //mostDownLeftChildButton.Background = Brushes.Yellow;
+                            Button mostDownMiddleChildButton = (Button)fieldController.canvas.Children[x + (y + _currentShip) * 10];
+                            mostDownMiddleChildButton.Background = Brushes.Yellow;
                         }
-                        if (x + _currentShip <= 9 && y + 1 < 9)
+                        if (y + _currentShip <= 9 && x + 1 < 9)
                         {
-                            Button mostDownRightChildButton = (Button)fieldController.canvas.Children[(x + _currentShip) + (y + 1) * 10];
-                            //mostDownRightChildButton.Background = Brushes.Yellow;
+                            Button mostDownRightChildButton = (Button)fieldController.canvas.Children[(x + 1) + (y + _currentShip) * 10];
+                            mostDownRightChildButton.Background = Brushes.Yellow;
                         }
                         for (int i = 0; i < _currentShip; ++i)
                         {
                             var numbOfShipCell = x + (y + i) * 10;
                             Button childButton = (Button)fieldController.canvas.Children[numbOfShipCell];
                             childButton.Background = Brushes.Red;
-                            if (numbOfShipCell - 1 >= 0)
+                            if (x - 1 >= 0)
                             {
                                 Button leftChildButton = (Button)fieldController.canvas.Children[numbOfShipCell - 1];
                                 leftChildButton.Background = Brushes.Yellow;
                             }
-                            if (numbOfShipCell + 1 <= 99)
+                            if (x + 1 <= 9)
                             {
-                                Button belowerChildButton = (Button)fieldController.canvas.Children[numbOfShipCell + 1];
-                                belowerChildButton.Background = Brushes.Yellow;
+                                Button rightChildButton = (Button)fieldController.canvas.Children[numbOfShipCell + 1];
+                                rightChildButton.Background = Brushes.Yellow;
                             }
                         }
                     }
