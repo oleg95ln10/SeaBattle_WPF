@@ -53,60 +53,101 @@ namespace SeaBattle.Model
                 // Левая верхняя ячейка
                 if (y - 1 >= 0 && x - 1 >= 0)
                 {
-                    var coord = ((x - 1) + (y - 1) * 10);
-                    AddValuesToDictAndField(coord, -1);
+                   AddValuesToDictAndField(((x - 1) + (y - 1) * 10));
                 }
-                //if (x + shipLenght <= 9 && y - 1 >= 0)
-                //{
-                //    Button mostUpRightChildButton = (Button)fieldController.canvas.Children[(x + shipLenght) + (y - 1) * 10];
-                //    mostUpRightChildButton.Background = Brushes.Yellow;
-                //}
-                //if (x - 1 >= 0 && x - 1 <= 9)
-                //{
-                //    Button mostMidleLeftChildButton = (Button)fieldController.canvas.Children[(x - 1) + y * 10];
-                //    mostMidleLeftChildButton.Background = Brushes.Yellow;
-                //}
-                //if (x + shipLenght <= 9)
-                //{
-                //    Button mostMidleRightChildButton = (Button)fieldController.canvas.Children[(x + shipLenght) + y * 10];
-                //    mostMidleRightChildButton.Background = Brushes.Yellow;
-                //}
-                //if (y + 1 <= 9 && x - 1 >= 0)
-                //{
-                //    Button mostDownLeftChildButton = (Button)fieldController.canvas.Children[(x - 1) + (y + 1) * 10];
-                //    mostDownLeftChildButton.Background = Brushes.Yellow;
-                //}
-                //if (x + shipLenght <= 9 && y + 1 <= 9)
-                //{
-                //    Button mostDownRightChildButton = (Button)fieldController.canvas.Children[(x + shipLenght) + (y + 1) * 10];
-                //    mostDownRightChildButton.Background = Brushes.Yellow;
-                //}
-                //for (int i = 0; i < shipLenght; ++i)
-                //{
-                //    var numbOfShipCell = x + i + y * 10;
-                //    Button childButton = (Button)fieldController.canvas.Children[numbOfShipCell];
-                //    childButton.Background = Brushes.Red;
-                //    if (numbOfShipCell - 10 >= 0)
-                //    {
-                //        Button higherChildButton = (Button)fieldController.canvas.Children[numbOfShipCell - 10];
-                //        higherChildButton.Background = Brushes.Yellow;
-                //    }
-                //    if (numbOfShipCell + 10 <= 99)
-                //    {
-                //        Button belowerChildButton = (Button)fieldController.canvas.Children[numbOfShipCell + 10];
-                //        belowerChildButton.Background = Brushes.Yellow;
-                //    }
-                //}
+                // Правая верхняя ячейка
+                if (x + shipLenght <= 9 && y - 1 >= 0)
+                {
+                    AddValuesToDictAndField(((x + shipLenght) + (y - 1) * 10));
+                }
+                // Средняя левая ячейка
+                if (x - 1 >= 0 && x - 1 <= 9)
+                {
+                    AddValuesToDictAndField( ( (x - 1) + y * 10));
+                }
+                // Средняя правая ячейка
+                if (x + shipLenght <= 9)
+                {
+                   AddValuesToDictAndField((x + shipLenght) + y * 10);
+                }
+                // Левая нижняя ячейка
+                if (y + 1 <= 9 && x - 1 >= 0)
+                {
+                    AddValuesToDictAndField((x - 1) + (y + 1) * 10);
+                }
+                // Правая нижняя ячейка
+                if (x + shipLenght <= 9 && y + 1 <= 9)
+                {
+                    AddValuesToDictAndField((x + shipLenght) + (y + 1) * 10);
+                }
+                for (int i = 0; i < shipLenght; ++i)
+                {
+                    var numbOfShipCell = x + i + y * 10;
+                    AddValuesToDictAndField(numbOfShipCell, CellStatus.ShipOn);
+                    if (numbOfShipCell - 10 >= 0)
+                    {
+                        AddValuesToDictAndField(numbOfShipCell - 10);
+                    }
+                    if (numbOfShipCell + 10 <= 99)
+                    {
+                        AddValuesToDictAndField(numbOfShipCell + 10);
+                    }
+                }
             }
         }
         private void PlaceVerticalShip(int x, int y, int shipLenght)
         {
-
+            if ((x <= 10 && y + shipLenght <= 10) && (y + shipLenght >= 0 && x >= 0))
+            {
+                // Левая верхняя ячейка
+                if (y - 1 >= 0 && x - 1 >= 0)
+                {
+                    AddValuesToDictAndField((x - 1) + (y - 1));
+                }
+                // Правая верхняя ячейка
+                if (x + 1 <= 9 && y - 1 >= 0)
+                {
+                   // AddValuesToDictAndField((x + 1) + (y - 1));
+                }
+                // Средняя левая ячейка
+                if (y - 1 >= 0)
+                {
+                    //AddValuesToDictAndField(x + (y - 1));
+                }
+                // Средняя правая ячейка
+                if (y + shipLenght <= 9 && x - 1 >= 0)
+                {
+                   // AddValuesToDictAndField((x - 1) + (y + shipLenght));
+                }
+                // Левая нижняя ячейка
+                if (y + shipLenght <= 9)
+                {
+                    //AddValuesToDictAndField(x + (y + shipLenght));
+                }
+                // Правая нижняя ячейка
+                if (y + shipLenght <= 9 && x + 1 < 9)
+                {
+                    //AddValuesToDictAndField((x + 1) + (y + shipLenght));
+                }
+                for (int i = 0; i < shipLenght; ++i)
+                {
+                    var numbOfShipCell = x + (y + i) * 10;
+                    AddValuesToDictAndField(numbOfShipCell, CellStatus.ShipOn);
+                    if (x - 1 >= 0)
+                    {
+                        //AddValuesToDictAndField(numbOfShipCell - 1);
+                    }
+                    if (x + 1 <= 9)
+                    {
+                        //AddValuesToDictAndField(numbOfShipCell + 1);
+                    }
+                }
+            }
         }
-        private void AddValuesToDictAndField(int key,int value)
+        private void AddValuesToDictAndField(int key, CellStatus status = CellStatus.Busy)
         {
-            Field.Cells[key].CellValue = value;
-            _placementHist.History.Add(key, value);
+            Field.Cells[key].CellValue = (int)status;
+            _placementHist.History.Add(key, status);
         }
     }
 }

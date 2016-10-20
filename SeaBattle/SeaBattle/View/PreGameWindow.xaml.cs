@@ -33,59 +33,47 @@ namespace SeaBattle.View
         public PreGameWindow(ref Player player)
         {
             InitializeComponent();
+            this._player = player;
+            Init();
+        }
+        private void Init()
+        {
             _shipArray = new int[AbstractPlayer.ShipArray.Length];
-            _shipArray = AbstractPlayer.ShipArray;
+            _shipArray = (int[])AbstractPlayer.ShipArray.Clone();
             _currentShip = _shipArray.Max();
             _shipArray.SetValue(-100, Array.IndexOf(_shipArray, _shipArray.Max()));
-            ship.Height = Cell.CellSize-2;
-            ship.Width = (Cell.CellSize-2) * _currentShip;
+            ship.Height = Cell.CellSize - 2;
+            ship.Width = (Cell.CellSize - 2) * _currentShip;
             _zeroShipPosition = new Point(Canvas.GetLeft(ship), Canvas.GetTop(ship));
             _isShipCanPlace = true;
             _isCanmove = false;
-            this._player = player;
+            _player.ResetField();
             _shipDirection = ShipDirection.Horizontal;
         }
-
         private void FieldController_PreviewMouseLeftButtonDown(object sender)
         {
-            Button but = sender as Button;
-            var x = (int)(Canvas.GetLeft(but) / Cell.CellSize);
-            var y = (int)(Canvas.GetTop(but) / Cell.CellSize);
+            Button selectedButton = sender as Button;
+            var x = (int)(Canvas.GetLeft(selectedButton) / Cell.CellSize);
+            var y = (int)(Canvas.GetTop(selectedButton) / Cell.CellSize);
 
             if (_player.IsCanBePlaced(x, y))
-            {
                 _isShipCanPlace = true;
-            }
             else
                _isShipCanPlace = false;
+
             if (Mouse.GetPosition(this).X < 250 && Mouse.GetPosition(this).Y < 243 && _isShipCanPlace)
             {
-                lab1.Content = Mouse.GetPosition(this);
-                shipDirection.Content = y + 1;
-                //нужно вызывать это метод у пользователя и у него менять значения полей, потом выводить на кнопки
-                //PlaceShip(x, y);
-
-                //меняем числа ячеек
                 _player.PlaceShips(x,y,_currentShip, _shipDirection);
-                //на основе измененных ячеек раскрашиваем поле
-
                 UIElementCollection childs = fieldController.canvas.Children;
-                Dictionary<int, int> hist = _player.PlacementHist.History;
+                Dictionary<int, CellStatus> hist = _player.PlacementHist.History;
                 CellColorConverter.SetColorOfCell(ref childs,ref hist);
                 _player.PlacementHist.History.Clear();
                 Canvas.SetLeft(ship, _zeroShipPosition.X);
                 Canvas.SetTop(ship, _zeroShipPosition.Y);
-
                 if (_shipArray.Max() > 0)
-                {
-                    ship.Width = Cell.CellSize * _shipArray.Max();
-                    _currentShip = _shipArray.Max();
-                    _shipArray.SetValue(-100, Array.IndexOf(_shipArray, _shipArray.Max()));
-                }
+                    GetShip();
                 else
-                {
                     ship.Visibility = Visibility.Hidden;
-                }
             }
         }
         private void ship_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -229,6 +217,12 @@ namespace SeaBattle.View
                     }
                     break;
             }
+        }
+        private void GetShip()
+        {
+            ship.Width = Cell.CellSize * _shipArray.Max();
+            _currentShip = _shipArray.Max();
+            _shipArray.SetValue(-100, Array.IndexOf(_shipArray, _shipArray.Max()));
         }
     }
 }

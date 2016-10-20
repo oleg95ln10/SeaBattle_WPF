@@ -17,12 +17,12 @@ namespace SeaBattle.Model
         /// <summary>
         /// Выбран словарь, т.к. одна ячейка(ключ) не может иметь более 1 значения (есть корабль, нет корабля)
         /// </summary>
-        private Dictionary<int, int> _history;
+        private Dictionary<int, CellStatus> _history;
         public PlacementHistory()
         {
-            _history = new Dictionary<int, int>();
+            _history = new Dictionary<int, CellStatus>();
         }
-        public Dictionary<int, int> History
+        public Dictionary<int, CellStatus> History
         {
             get  { return _history; }
             set  { _history = value;}

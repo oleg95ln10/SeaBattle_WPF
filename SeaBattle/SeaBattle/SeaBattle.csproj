@@ -57,6 +57,7 @@
     </ApplicationDefinition>
     <Compile Include="Model\AIPlayer.cs" />
     <Compile Include="Model\Cell.cs" />
+    <Compile Include="Model\CellStatus.cs" />
     <Compile Include="Model\Field.cs" />
     <Compile Include="Model\PlacementHistory.cs" />
     <Compile Include="Model\ShipDirection.cs" />

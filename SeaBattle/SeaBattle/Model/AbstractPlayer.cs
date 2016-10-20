@@ -12,7 +12,7 @@ namespace SeaBattle.Model
         private int _score;
         private List<Ship> _ships;
         private Field _field;
-        public static int[] ShipArray = { 1, 1, 1, 1, 2, 2, 2, 3, 3, 4 };
+        public static readonly int[] ShipArray = { 1, 1, 1, 1, 2, 2, 2, 3, 3, 4 };
         public AbstractPlayer()
         {
             _ships = new List<Ship>();
@@ -42,6 +42,13 @@ namespace SeaBattle.Model
             set { _field = value;}
         }
         #endregion
+        public void ResetField()
+        {
+            foreach (Cell l in _field)
+            {
+                l.CellValue = 0;
+            }
+        }
         private void AddShips()
         {
             for (int i = 0; i < 10; ++i)
