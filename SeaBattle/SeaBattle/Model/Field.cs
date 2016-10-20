@@ -8,23 +8,24 @@ namespace SeaBattle.Model
 {
     public class Field
     {
-        private Cell [,] _cells;
+        private List<Cell> _cells;
         public Field()
         {
-            _cells = new Cell[10, 10];
+            _cells = new List<Cell>() { Capacity = 100};
 
-            for (int i = 0 ; i < 10; ++i)
+            for (int i = 0 ; i < _cells.Capacity; ++i)
             {
-                for (int j = 0 ; j < 10; ++j)
-                {
-                    _cells[i, j] = new Cell();
-                }
+                _cells.Add(new Cell());
             }
         }
-        public Cell[,] Cells
+        public List<Cell> Cells
         {
             get { return _cells; }
             set { _cells = value;}
+        }
+        public static int DecartToLine(int x, int y)
+        {
+            return x + (y * 10);
         }
     }
 }

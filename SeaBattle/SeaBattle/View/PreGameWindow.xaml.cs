@@ -25,10 +25,11 @@ namespace SeaBattle.View
         private Player _player;
         private bool _isCanmove;
         private int[] _shipArray;
+        private bool _isShipCanPlace;
         private int _currentShip;
         Point _mousePosition;
         Point _zeroShipPosition;
-        ShipDirection _direction;
+        ShipDirection _shipDirection;
         public PreGameWindow(ref Player player)
         {
             InitializeComponent();
@@ -39,23 +40,39 @@ namespace SeaBattle.View
             ship.Height = Cell.CellSize-2;
             ship.Width = (Cell.CellSize-2) * _currentShip;
             _zeroShipPosition = new Point(Canvas.GetLeft(ship), Canvas.GetTop(ship));
+            _isShipCanPlace = true;
             _isCanmove = false;
-
             this._player = player;
-            _direction = ShipDirection.Horizontal;
+            _shipDirection = ShipDirection.Horizontal;
         }
 
         private void FieldController_PreviewMouseLeftButtonDown(object sender)
         {
-            var eed = Mouse.GetPosition(this).Y;
-            if (Mouse.GetPosition(this).X < 250 && Mouse.GetPosition(this).Y < 243)
+            Button but = sender as Button;
+            var x = (int)(Canvas.GetLeft(but) / Cell.CellSize);
+            var y = (int)(Canvas.GetTop(but) / Cell.CellSize);
+
+            if (_player.IsCanBePlaced(x, y))
             {
-                Button but = sender as Button;
-                var x = (int)(Canvas.GetLeft(but) / Cell.CellSize);
-                var y = (int)(Canvas.GetTop(but) / Cell.CellSize);
+                _isShipCanPlace = true;
+            }
+            else
+               _isShipCanPlace = false;
+            if (Mouse.GetPosition(this).X < 250 && Mouse.GetPosition(this).Y < 243 && _isShipCanPlace)
+            {
                 lab1.Content = Mouse.GetPosition(this);
                 shipDirection.Content = y + 1;
-                PlaceShip(x, y);
+                //нужно вызывать это метод у пользователя и у него менять значения полей, потом выводить на кнопки
+                //PlaceShip(x, y);
+
+                //меняем числа ячеек
+                _player.PlaceShips(x,y,_currentShip, _shipDirection);
+                //на основе измененных ячеек раскрашиваем поле
+
+                UIElementCollection childs = fieldController.canvas.Children;
+                Dictionary<int, int> hist = _player.PlacementHist.History;
+                CellColorConverter.SetColorOfCell(ref childs,ref hist);
+                _player.PlacementHist.History.Clear();
                 Canvas.SetLeft(ship, _zeroShipPosition.X);
                 Canvas.SetTop(ship, _zeroShipPosition.Y);
 
@@ -96,16 +113,16 @@ namespace SeaBattle.View
         private void HorizontalButton_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             ship.LayoutTransform = new RotateTransform(0);
-            _direction = ShipDirection.Horizontal;
+            _shipDirection = ShipDirection.Horizontal;
         }
         private void VerticalButton_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             ship.LayoutTransform = new RotateTransform(90);
-            _direction = ShipDirection.Vertical;
+            _shipDirection = ShipDirection.Vertical;
         }
         private void PlaceShip(int x, int y)
         {
-            switch (_direction)
+            switch (_shipDirection)
             {
                 case ShipDirection.Horizontal:
                     if ((x + _currentShip <= 10 && y <= 9) && (x + _currentShip >= 0 && y >= 0))
