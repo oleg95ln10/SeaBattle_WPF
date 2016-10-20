@@ -101,7 +101,6 @@
     </Compile>
     <Compile Include="Model\AbstractPlayer.cs" />
     <Compile Include="Model\Player.cs" />
-    <Compile Include="Model\Ship.cs" />
     <Compile Include="Model\TypeOfShips.cs" />
     <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>

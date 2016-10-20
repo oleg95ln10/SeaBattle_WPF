@@ -14,6 +14,7 @@
         <Label Name="shipDirection" Content="How to place ship?" Canvas.Left="268" Canvas.Top="158"></Label>
         <Button Content="Horizontal" Canvas.Left="263" Canvas.Top="189" Width="121" PreviewMouseLeftButtonDown="HorizontalButton_MouseLeftButtonDown"></Button>
         <Button Content="Vertical" Canvas.Left="263" Canvas.Top="228" Width="121" PreviewMouseLeftButtonDown="VerticalButton_MouseLeftButtonDown"></Button>
+        <Button Name="automaticShipGeneration" Height="40" Width="394" Canvas.Top="255" Content = "Auto placing" PreviewMouseLeftButtonDown="AutomaticShipGeneration_PreviewMouseLeftButtonDown"></Button>
     </Canvas>
 
 </Window>
