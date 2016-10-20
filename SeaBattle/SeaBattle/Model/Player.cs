@@ -17,13 +17,13 @@ namespace SeaBattle.Model
 
         public PlacementHistory PlacementHist
         {
-            get  { return _placementHist;  }
-            set  { _placementHist = value; }
+            get { return _placementHist; }
+            set { _placementHist = value; }
         }
 
         public void PlaceShips(int x, int y, int shipLenght, ShipDirection shipDirection)
         {
-            if (Field.DecartToLine(x,y) < Field.Cells.Count && IsCanBePlaced(x, y))
+            if (Field.DecartToLine(x, y) < Field.Cells.Count && IsCanBePlaced(x, y))
             {
                 var key = Field.DecartToLine(x, y);
                 //Field.Cells[key].CellValue = 1;
@@ -53,7 +53,7 @@ namespace SeaBattle.Model
                 // Левая верхняя ячейка
                 if (y - 1 >= 0 && x - 1 >= 0)
                 {
-                   AddValuesToDictAndField(((x - 1) + (y - 1) * 10));
+                    AddValuesToDictAndField(((x - 1) + (y - 1) * 10));
                 }
                 // Правая верхняя ячейка
                 if (x + shipLenght <= 9 && y - 1 >= 0)
@@ -63,12 +63,12 @@ namespace SeaBattle.Model
                 // Средняя левая ячейка
                 if (x - 1 >= 0 && x - 1 <= 9)
                 {
-                    AddValuesToDictAndField( ( (x - 1) + y * 10));
+                    AddValuesToDictAndField(((x - 1) + y * 10));
                 }
                 // Средняя правая ячейка
                 if (x + shipLenght <= 9)
                 {
-                   AddValuesToDictAndField((x + shipLenght) + y * 10);
+                    AddValuesToDictAndField((x + shipLenght) + y * 10);
                 }
                 // Левая нижняя ячейка
                 if (y + 1 <= 9 && x - 1 >= 0)
@@ -102,32 +102,32 @@ namespace SeaBattle.Model
                 // Левая верхняя ячейка
                 if (y - 1 >= 0 && x - 1 >= 0)
                 {
-                    AddValuesToDictAndField((x - 1) + (y - 1));
+                    AddValuesToDictAndField((x - 1) + (y - 1) * 10);
                 }
                 // Правая верхняя ячейка
                 if (x + 1 <= 9 && y - 1 >= 0)
                 {
-                   // AddValuesToDictAndField((x + 1) + (y - 1));
+                    AddValuesToDictAndField((x + 1) + (y - 1) * 10);
                 }
                 // Средняя левая ячейка
                 if (y - 1 >= 0)
                 {
-                    //AddValuesToDictAndField(x + (y - 1));
+                    AddValuesToDictAndField(x + (y - 1) * 10);
                 }
                 // Средняя правая ячейка
                 if (y + shipLenght <= 9 && x - 1 >= 0)
                 {
-                   // AddValuesToDictAndField((x - 1) + (y + shipLenght));
+                    AddValuesToDictAndField((x - 1) + (y + shipLenght) * 10);
                 }
                 // Левая нижняя ячейка
                 if (y + shipLenght <= 9)
                 {
-                    //AddValuesToDictAndField(x + (y + shipLenght));
+                    AddValuesToDictAndField(x + (y + shipLenght) * 10);
                 }
                 // Правая нижняя ячейка
-                if (y + shipLenght <= 9 && x + 1 < 9)
+                if (y + shipLenght <= 9 && x + 1 <= 9)
                 {
-                    //AddValuesToDictAndField((x + 1) + (y + shipLenght));
+                    AddValuesToDictAndField((x + 1) + (y + shipLenght) * 10);
                 }
                 for (int i = 0; i < shipLenght; ++i)
                 {
@@ -135,11 +135,11 @@ namespace SeaBattle.Model
                     AddValuesToDictAndField(numbOfShipCell, CellStatus.ShipOn);
                     if (x - 1 >= 0)
                     {
-                        //AddValuesToDictAndField(numbOfShipCell - 1);
+                        AddValuesToDictAndField(numbOfShipCell - 1);
                     }
                     if (x + 1 <= 9)
                     {
-                        //AddValuesToDictAndField(numbOfShipCell + 1);
+                        AddValuesToDictAndField(numbOfShipCell + 1);
                     }
                 }
             }
