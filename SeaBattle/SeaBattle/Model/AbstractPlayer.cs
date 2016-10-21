@@ -70,7 +70,7 @@ namespace SeaBattle.Model
 
 
 
-            Field.Cells[0].CellValue = 1;
+            Field.Cells[0].CellValue = CellStatus.ShipOn;
             _placementHist.History.Add(0, CellStatus.ShipOn);
         }
         public void PlaceShips(int x, int y, int shipLenght, ShipDirection shipDirection)
@@ -90,17 +90,24 @@ namespace SeaBattle.Model
         }
         public bool IsCanBePlaced(int x, int y, int shipLenght, ShipDirection direction)
         {
-            bool isZeroVAlueOfCell = Field.Cells[Field.DecartToLine(x, y)].CellValue == 0;
-
             bool result = false;
 
-            if (direction == ShipDirection.Horizontal)
-
-                    result = true;
-            if (direction == ShipDirection.Vertical)
-                if (Field.Cells[Field.DecartToLine(x, y + shipLenght)].CellValue != (int)CellStatus.ShipOn)
-                    result = true;
-
+            if ( Field.Cells[ Field.DecartToLine( x, y ) ].CellValue == CellStatus.Empty )
+            {
+                switch (direction)
+                {
+                    case ShipDirection.Horizontal:
+                        if( IsPossibleCoordinate( x + shipLenght - 1 ) )
+                            if ( Field.Cells[ Field.DecartToLine( x + shipLenght - 1, y ) ].CellValue == CellStatus.Empty )
+                                result = true;
+                        break;
+                    case ShipDirection.Vertical:
+                        if ( IsPossibleCoordinate( y + shipLenght - 1) )
+                            if ( Field.Cells[ Field.DecartToLine( x , y + shipLenght - 1 ) ].CellValue == CellStatus.Empty )
+                                result = true;
+                        break;
+                }
+            }
             return result;
         }
         private void PlaceHorizontalShip(int x, int y, int shipLenght)
@@ -222,7 +229,7 @@ namespace SeaBattle.Model
         }
         protected void AddValuesToDictAndField(int key, CellStatus status = CellStatus.Busy)
         {
-            Field.Cells[key].CellValue = (int)status;
+            Field.Cells[key].CellValue = status;
             PlacementHist.History.Add(key, status);
         }
 

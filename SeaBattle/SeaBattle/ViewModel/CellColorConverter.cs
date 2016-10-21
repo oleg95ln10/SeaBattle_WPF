@@ -24,8 +24,7 @@ namespace SeaBattle.ViewModel
                         break;
                     case CellStatus.Busy:
                         b.Background = Brushes.Yellow;
-                        break; 
-
+                        break;
                 }
             }
         }

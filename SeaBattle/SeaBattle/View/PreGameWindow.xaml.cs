@@ -31,13 +31,13 @@ namespace SeaBattle.View
         }
         private void Init()
         {
-            _shipArray = new int[AbstractPlayer.ShipArray.Length];
+            _shipArray = new int[ AbstractPlayer.ShipArray.Length ];
             _shipArray = (int[])AbstractPlayer.ShipArray.Clone();
             _currentShip = _shipArray.Max();
-            _shipArray.SetValue(-100, Array.IndexOf(_shipArray, _shipArray.Max()));
+            _shipArray.SetValue( -100, Array.IndexOf(_shipArray, _shipArray.Max() ) );
             ship.Height = Cell.CellSize - 2;
-            ship.Width = (Cell.CellSize - 2) * _currentShip;
-            _zeroShipPosition = new Point(Canvas.GetLeft(ship), Canvas.GetTop(ship));
+            ship.Width = ( Cell.CellSize - 2 ) * _currentShip;
+            _zeroShipPosition = new Point( Canvas.GetLeft( ship ), Canvas.GetTop( ship ) );
             _isShipCanPlace = true;
             _isCanmove = false;
             _player.ResetField();
@@ -46,20 +46,20 @@ namespace SeaBattle.View
         private void FieldController_PreviewMouseLeftButtonDown(object sender)
         {
             Button selectedButton = sender as Button;
-            var x = (int)(Canvas.GetLeft(selectedButton) / Cell.CellSize);
-            var y = (int)(Canvas.GetTop(selectedButton) / Cell.CellSize);
+            var x = (int)( Canvas.GetLeft( selectedButton) / Cell.CellSize );
+            var y = (int)( Canvas.GetTop( selectedButton) / Cell.CellSize );
 
-            if (_player.IsCanBePlaced(x, y, _currentShip, _shipDirection))
+            if ( _player.IsCanBePlaced( x, y, _currentShip, _shipDirection ) )
                 _isShipCanPlace = true;
             else
                _isShipCanPlace = false;
 
-            if (Mouse.GetPosition(this).X < 250 && Mouse.GetPosition(this).Y < 243 && _isShipCanPlace)
+            if ( Mouse.GetPosition( this ).X < 250 && Mouse.GetPosition( this ).Y < 243 && _isShipCanPlace )
             {
-                PlaceShipOnMap(x, y);
-                Canvas.SetLeft(ship, _zeroShipPosition.X);
-                Canvas.SetTop(ship, _zeroShipPosition.Y);
-                if (_shipArray.Max() > 0)
+                PlaceShipOnMap( x, y );
+                Canvas.SetLeft( ship, _zeroShipPosition.X );
+                Canvas.SetTop( ship, _zeroShipPosition.Y );
+                if ( _shipArray.Max() > 0 )
                     GetShip();
                 else
                     ship.Visibility = Visibility.Hidden;
@@ -68,40 +68,40 @@ namespace SeaBattle.View
         private void ship_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             Button but = sender as Button;
-            Mouse.Capture(but);
-            _mousePosition = Mouse.GetPosition(but);
+            Mouse.Capture( but );
+            _mousePosition = Mouse.GetPosition( but );
             _isCanmove = true;
         }
         private void ship_PreviewMouseMove(object sender, MouseEventArgs e)
         {
-            if (_isCanmove)
+            if ( _isCanmove )
             {
                 Button shipButton = sender as Button;
-                shipButton.SetValue(Canvas.LeftProperty, e.GetPosition(null).X - _mousePosition.X);
-                shipButton.SetValue(Canvas.TopProperty, e.GetPosition(null).Y - _mousePosition.Y);
+                shipButton.SetValue( Canvas.LeftProperty, e.GetPosition( null ).X - _mousePosition.X );
+                shipButton.SetValue( Canvas.TopProperty, e.GetPosition( null ).Y - _mousePosition.Y );
             }
         }
         private void ship_PreviewMouseUp(object sender, MouseButtonEventArgs e)
         {
-            Mouse.Capture(null);
+            Mouse.Capture( null );
             _isCanmove = false;
-            FieldController_PreviewMouseLeftButtonDown(sender);
+            FieldController_PreviewMouseLeftButtonDown( sender );
         }
         private void HorizontalButton_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            ship.LayoutTransform = new RotateTransform(0);
+            ship.LayoutTransform = new RotateTransform( 0 );
             _shipDirection = ShipDirection.Horizontal;
         }
         private void VerticalButton_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            ship.LayoutTransform = new RotateTransform(90);
+            ship.LayoutTransform = new RotateTransform( 90 );
             _shipDirection = ShipDirection.Vertical;
         }
         private void GetShip()
         {
             ship.Width = Cell.CellSize * _shipArray.Max();
             _currentShip = _shipArray.Max();
-            _shipArray.SetValue(-100, Array.IndexOf(_shipArray, _shipArray.Max()));
+            _shipArray.SetValue(-100, Array.IndexOf( _shipArray, _shipArray.Max() ) );
         }
         private void PlaceShipOnMap(int x, int y)
         {

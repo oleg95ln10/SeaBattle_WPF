@@ -8,8 +8,8 @@ namespace SeaBattle.Model
 {
     public enum CellStatus
     {
-        Busy = -1,
-        Empty,
-        ShipOn
+        ShipOn = -2,
+        Busy,
+        Empty
     }
 }
