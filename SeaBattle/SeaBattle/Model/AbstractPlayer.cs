@@ -60,9 +60,8 @@ namespace SeaBattle.Model
             int startY = 0;
             foreach (var v in tempShipArray)
             {
-                startX = startY = 9;
                 GetRandomShipDirection(out shipDirection);
-                //GetRandomCoordinates(ref startX, ref startY);
+                GetRandomCoordinates(ref startX, ref startY);
 
                 if (IsCanBePlaced(startX, startY, v, shipDirection) && Field.Cells[Field.DecartToLine(startX, startY)].CellValue == CellStatus.Empty)
                     PlaceShips(startX, startY, v, shipDirection);
@@ -77,12 +76,6 @@ namespace SeaBattle.Model
                 }
                 PlacementHist.History.Clear();
             }
-
-
-
-
-            //Field.Cells[0].CellValue = CellStatus.ShipOn;
-            //_placementHist.History.Add(0, CellStatus.ShipOn);
         }
         public void PlaceShips(int x, int y, int shipLenght, ShipDirection shipDirection)
         {

@@ -5,16 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SeaBattle.View"
         mc:Ignorable="d"
-        Title="PreGameWindow" Height="400" Width="411.2" ResizeMode="NoResize">
+        Title="PreGameWindow" Height="372.267" Width="411.2" ResizeMode="NoResize">
     <Canvas HorizontalAlignment="Left" Margin="0,0,-0.4,0" Width="394" Background="#FF12AACE">
         <local:FieldControl x:Name="fieldController" HorizontalAlignment="Left" Width="258" Height="250" Canvas.Left="5"/>
-        <Label Content="Choose ships for put:" Name="lab1" Canvas.Left="262"/>
-        <Button Name="ship" PreviewMouseLeftButtonDown="ship_PreviewMouseLeftButtonDown" PreviewMouseMove="ship_PreviewMouseMove" PreviewMouseUp="ship_PreviewMouseUp" Canvas.Left="268" Canvas.Top="62" RenderTransformOrigin="0.5,0.5">
-        </Button>
-        <Label Name="shipDirection" Content="How to place ship?" Canvas.Left="268" Canvas.Top="158"></Label>
-        <Button Content="Horizontal" Canvas.Left="263" Canvas.Top="189" Width="121" PreviewMouseLeftButtonDown="HorizontalButton_MouseLeftButtonDown"></Button>
-        <Button Content="Vertical" Canvas.Left="263" Canvas.Top="228" Width="121" PreviewMouseLeftButtonDown="VerticalButton_MouseLeftButtonDown"></Button>
+        <Label Name="shipPutLabel" Content="Choose ships for put:" Canvas.Left="262"/>        
+        <Label Name="shipDirectionLabel" Content="How to place ship?" Canvas.Left="268" Canvas.Top="158"></Label>
+        <Button Name="ship" PreviewMouseLeftButtonDown="ship_PreviewMouseLeftButtonDown" PreviewMouseMove="ship_PreviewMouseMove" PreviewMouseUp="ship_PreviewMouseUp" Canvas.Left="268" Canvas.Top="62" RenderTransformOrigin="0.5,0.5"></Button>
+        <Button Name="horizontalShipPlacingButton" Content="Horizontal" Canvas.Left="263" Canvas.Top="189" Width="121" PreviewMouseLeftButtonDown="HorizontalButton_MouseLeftButtonDown"></Button>
+        <Button Name="verticalShipPlacingButton" Content="Vertical" Canvas.Left="263" Canvas.Top="228" Width="121" PreviewMouseLeftButtonDown="VerticalButton_MouseLeftButtonDown"></Button>
         <Button Name="automaticShipGeneration" Height="40" Width="394" Canvas.Top="255" Content = "Auto placing" PreviewMouseLeftButtonDown="AutomaticShipGeneration_PreviewMouseLeftButtonDown"></Button>
+        <Button Content="Start game" Name="startGameButton" Height="44" Width="394" Canvas.Top="300" Visibility="Hidden" PreviewMouseLeftButtonDown="StartGameButton_PreviewMouseLeftButtonDown"></Button>
     </Canvas>
 
 </Window>

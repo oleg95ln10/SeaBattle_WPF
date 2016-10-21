@@ -62,7 +62,11 @@ namespace SeaBattle.View
                 if ( _shipArray.Max() > 0 )
                     GetShip();
                 else
+                {
                     ship.Visibility = Visibility.Hidden;
+                    StartGameButton_PreviewMouseLeftButtonDown(sender, null);
+                }
+
             }
         }
         private void ship_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -112,15 +116,30 @@ namespace SeaBattle.View
         private void ChangeShipCellsColor()
         {
             UIElementCollection childs = fieldController.canvas.Children;
-            //Dictionary<int, CellStatus> hist = _player.PlacementHist.History;
-            //CellColorConverter.SetColorOfCell(ref childs, ref hist);
             CellColorConverter.SetColor(ref childs, _player.Field.Cells);
+        }
+        private void HideControls()
+        {
+            startGameButton.Visibility = Visibility.Visible;
+            ship.Visibility = Visibility.Hidden;
+            automaticShipGeneration.Visibility = Visibility.Hidden;
+            startGameButton.Visibility = Visibility.Visible;
+            horizontalShipPlacingButton.Visibility = Visibility.Hidden;
+            verticalShipPlacingButton.Visibility = Visibility.Hidden;
+            shipDirectionLabel.Content = "";
+            shipPutLabel.Content = "";
         }
         private void AutomaticShipGeneration_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             _player.AutomaticShipPlacing();
-
             ChangeShipCellsColor();
+            HideControls();
         }
+
+        private void StartGameButton_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            HideControls();
+        }
+
     }
 }
