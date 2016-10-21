@@ -30,17 +30,15 @@ namespace SeaBattle
 
             _model = new MainViewModel();
         }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
+        public MainViewModel Model
         {
-            this.Visibility = Visibility.Collapsed;
-            Player player = _model.FirstPlayer;
-            PreGameWindow pg = new PreGameWindow(ref player);
-            _model.FirstPlayer = player;
-            pg.Closed += (sender2, e2) =>
-            {
-                this.Visibility = Visibility.Visible;
-            };
+            get { return _model;  }
+            set { _model = value; }
+        }
+        private void StartGameButton_Click(object sender, RoutedEventArgs e)
+        {
+            PreGameWindow pg = new PreGameWindow(this);
+            this.Close();
             pg.ShowDialog();
         }
 

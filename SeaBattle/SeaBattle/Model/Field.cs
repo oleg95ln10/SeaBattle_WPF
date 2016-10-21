@@ -49,7 +49,6 @@ namespace SeaBattle.Model
             _index++;
             return true;
         }
-
         public void Reset()
         {
             _index = -1;

@@ -6,8 +6,5 @@
         xmlns:local="clr-namespace:SeaBattle.View"
         mc:Ignorable="d"
         Title="Game" Height="500" Width="700">
-    <Grid>
-        <Button Margin="10,10,394.6,259" Height="20" Width="20"></Button>
-
-    </Grid>
+    <Canvas HorizontalAlignment="Left" Width="690" Background="#FF12AACE"/>
 </Window>

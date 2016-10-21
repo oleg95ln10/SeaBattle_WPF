@@ -19,9 +19,12 @@ namespace SeaBattle.View
     /// </summary>
     public partial class Game : Window
     {
-        public Game()
+        private MainWindow _mainWindow;
+        public Game(MainWindow mainWindow)
         {
             InitializeComponent();
+            this._mainWindow = mainWindow;
+             var v =_mainWindow.Model;
         }
     }
 }
