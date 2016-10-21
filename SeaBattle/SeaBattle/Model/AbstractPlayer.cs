@@ -58,22 +58,19 @@ namespace SeaBattle.Model
             ShipDirection shipDirection;
             int startX = 0;
             int startY = 0;
-            int tempX, tempY;
             foreach (var v in tempShipArray)
             {
-                //startY = startX = 7;
+                startX = startY = 9;
                 GetRandomShipDirection(out shipDirection);
-                GetRandomCoordinates(out startX, out startY);
+                //GetRandomCoordinates(ref startX, ref startY);
 
                 if (IsCanBePlaced(startX, startY, v, shipDirection) && Field.Cells[Field.DecartToLine(startX, startY)].CellValue == CellStatus.Empty)
                     PlaceShips(startX, startY, v, shipDirection);
                 else
                 {
-                    while (!IsCanBePlaced(startX, startY, v, shipDirection) && Field.Cells[Field.DecartToLine(startX,startY)].CellValue != CellStatus.Empty)
+                    while (!IsCanBePlaced(startX, startY, v, shipDirection))
                     {
-                        GetRandomCoordinates(out tempX, out tempY);
-                        startX = tempX;
-                        startY = tempY;
+                        GetRandomCoordinates(ref startX, ref startY);
                         GetRandomShipDirection(out shipDirection);
                     }
                     PlaceShips(startX, startY, v, shipDirection);
@@ -228,7 +225,7 @@ namespace SeaBattle.Model
             else
                 direction = ShipDirection.Vertical;
         }
-        private void GetRandomCoordinates(out int x, out int y)
+        private void GetRandomCoordinates(ref int x, ref int y)
         {
             x = y = _r.Next(0,9);
             while (Field.Cells[Field.DecartToLine(x,y)].CellValue != CellStatus.Empty)
