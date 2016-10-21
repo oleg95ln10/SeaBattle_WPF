@@ -112,8 +112,9 @@ namespace SeaBattle.View
         private void ChangeShipCellsColor()
         {
             UIElementCollection childs = fieldController.canvas.Children;
-            Dictionary<int, CellStatus> hist = _player.PlacementHist.History;
-            CellColorConverter.SetColorOfCell(ref childs, ref hist);
+            //Dictionary<int, CellStatus> hist = _player.PlacementHist.History;
+            //CellColorConverter.SetColorOfCell(ref childs, ref hist);
+            CellColorConverter.SetColor(ref childs, _player.Field.Cells);
         }
         private void AutomaticShipGeneration_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {

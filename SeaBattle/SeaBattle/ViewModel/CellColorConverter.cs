@@ -28,5 +28,22 @@ namespace SeaBattle.ViewModel
                 }
             }
         }
+        public static void SetColor(ref UIElementCollection collection, List<Cell> history)
+        {
+            for (int i = 0; i< history.Count; ++i)
+            {
+                Button b = (Button)collection[i];
+                switch (history[i].CellValue)
+                {
+                    case CellStatus.ShipOn:
+                        b.Background = Brushes.Red;
+                        break;
+                    case CellStatus.Busy:
+                        b.Background = Brushes.Yellow;
+                        break;
+                }
+
+            }
+        }
     }
 }

@@ -46,32 +46,46 @@ namespace SeaBattle.Model
         {
             foreach (Cell l in _field)
             {
-                l.CellValue = 0;
+                l.CellValue = CellStatus.Empty;
             }
         }
         public void AutomaticShipPlacing()
         {
             //Если верить математике, у нас будет всегда как минимум 1 расстановка кораблей, 
             // удовлетворяющая правлам, если начать расставлять с наибольшего корабля
-
             var tempShipArray = (int [])ShipArray.Clone();
             Array.Reverse(tempShipArray);
             ShipDirection shipDirection;
             int startX = 0;
             int startY = 0;
+            int tempX, tempY;
             foreach (var v in tempShipArray)
             {
+                //startY = startX = 7;
                 GetRandomShipDirection(out shipDirection);
                 GetRandomCoordinates(out startX, out startY);
 
-
+                if (IsCanBePlaced(startX, startY, v, shipDirection) && Field.Cells[Field.DecartToLine(startX, startY)].CellValue == CellStatus.Empty)
+                    PlaceShips(startX, startY, v, shipDirection);
+                else
+                {
+                    while (!IsCanBePlaced(startX, startY, v, shipDirection) && Field.Cells[Field.DecartToLine(startX,startY)].CellValue != CellStatus.Empty)
+                    {
+                        GetRandomCoordinates(out tempX, out tempY);
+                        startX = tempX;
+                        startY = tempY;
+                        GetRandomShipDirection(out shipDirection);
+                    }
+                    PlaceShips(startX, startY, v, shipDirection);
+                }
+                PlacementHist.History.Clear();
             }
 
 
 
 
-            Field.Cells[0].CellValue = CellStatus.ShipOn;
-            _placementHist.History.Add(0, CellStatus.ShipOn);
+            //Field.Cells[0].CellValue = CellStatus.ShipOn;
+            //_placementHist.History.Add(0, CellStatus.ShipOn);
         }
         public void PlaceShips(int x, int y, int shipLenght, ShipDirection shipDirection)
         {
@@ -90,25 +104,23 @@ namespace SeaBattle.Model
         }
         public bool IsCanBePlaced(int x, int y, int shipLenght, ShipDirection direction)
         {
-            bool result = false;
-
             if ( Field.Cells[ Field.DecartToLine( x, y ) ].CellValue == CellStatus.Empty )
             {
-                switch (direction)
+                switch ( direction )
                 {
                     case ShipDirection.Horizontal:
                         if( IsPossibleCoordinate( x + shipLenght - 1 ) )
                             if ( Field.Cells[ Field.DecartToLine( x + shipLenght - 1, y ) ].CellValue == CellStatus.Empty )
-                                result = true;
+                                return true;
                         break;
                     case ShipDirection.Vertical:
                         if ( IsPossibleCoordinate( y + shipLenght - 1) )
                             if ( Field.Cells[ Field.DecartToLine( x , y + shipLenght - 1 ) ].CellValue == CellStatus.Empty )
-                                result = true;
+                                return true;
                         break;
                 }
             }
-            return result;
+            return false;
         }
         private void PlaceHorizontalShip(int x, int y, int shipLenght)
         {
@@ -218,20 +230,23 @@ namespace SeaBattle.Model
         }
         private void GetRandomCoordinates(out int x, out int y)
         {
-            x = _r.Next(0, 9);
-            y = _r.Next(0, 9);
+            x = y = _r.Next(0,9);
+            while (Field.Cells[Field.DecartToLine(x,y)].CellValue != CellStatus.Empty)
+            {
+                x = _r.Next(0, 9);
+                y = _r.Next(0, 9);
+            }
         }
         private bool IsPossibleCoordinate(int coordinate)
         {
-            if (coordinate >= 0 && coordinate <= 9)
+            if ( coordinate >= 0 && coordinate <= 9 )
                 return true;
             return false;
         }
         protected void AddValuesToDictAndField(int key, CellStatus status = CellStatus.Busy)
         {
-            Field.Cells[key].CellValue = status;
-            PlacementHist.History.Add(key, status);
+            Field.Cells[ key ].CellValue = status;
+            PlacementHist.History.Add( key, status );
         }
-
     }
 }
