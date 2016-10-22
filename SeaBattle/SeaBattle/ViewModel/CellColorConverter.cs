@@ -31,6 +31,9 @@ namespace SeaBattle.ViewModel
                     case CellStatus.ComputerShip:
                         b.Background = Brushes.HotPink;
                         break;
+                    case CellStatus.ComputerShot:
+                        b.Background = Brushes.Black;
+                        break;
                 }
             }
         }

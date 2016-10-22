@@ -6,12 +6,9 @@ using System.Threading.Tasks;
 
 namespace SeaBattle.Model
 {
-    class AIPlayer : AbstractPlayer
+    interface IAIPlayer
     {
-        public AIPlayer()
-            : base()
-        {
-
-        }
+        void GetShotMap();
+        void Shuffle();
     }
 }

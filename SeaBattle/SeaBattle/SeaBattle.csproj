@@ -55,9 +55,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Model\AIPlayer.cs" />
+    <Compile Include="Model\IAIPlayer.cs" />
     <Compile Include="Model\Cell.cs" />
     <Compile Include="Model\CellStatus.cs" />
+    <Compile Include="Model\ComputerPlayer.cs" />
     <Compile Include="Model\Field.cs" />
     <Compile Include="Model\PlacementHistory.cs" />
     <Compile Include="Model\ShipDirection.cs" />

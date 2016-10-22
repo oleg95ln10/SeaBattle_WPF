@@ -26,10 +26,7 @@ namespace SeaBattle.Model
             get { return _cells; }
             set { _cells = value;}
         }
-        public static int DecartToLine(int x, int y)
-        {
-            return x + (y * 10);
-        }
+
         public object Current
         {
             get  { return _cells[_index]; }
@@ -52,6 +49,15 @@ namespace SeaBattle.Model
         public void Reset()
         {
             _index = -1;
+        }
+        public static int DecartToLine(int x, int y)
+        {
+            return x + (y * 10);
+        }
+        public static void LineToDecart(int coordinate, out int x, out int y)
+        {
+            y = coordinate % 10;
+            x = coordinate / 10;
         }
     }
 }

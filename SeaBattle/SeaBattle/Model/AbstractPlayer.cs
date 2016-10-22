@@ -134,10 +134,6 @@ namespace SeaBattle.Model
                     AddValuesToDictAndField(indexOfFieldCell, _player.PlacementHist.History, CellStatus.PlayerShot);
             }
         }
-        public void AutoMove()
-        {
-
-        }
         private void PlaceHorizontalShip(int x, int y, int shipLenght)
         {
             if ((x + shipLenght <= 10 && y <= 9) && (x + shipLenght >= 0 && y >= 0))

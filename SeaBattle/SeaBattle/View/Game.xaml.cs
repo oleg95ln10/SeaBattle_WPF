@@ -25,7 +25,7 @@ namespace SeaBattle.View
         private bool _isGameOver;
         // Для уменьшения записи
         private Player _player;
-        private AbstractPlayer _computerPlayer;
+        private ComputerPlayer _computerPlayer;
         public Game(MainWindow mainWindow)
         {
             InitializeComponent();
@@ -33,6 +33,7 @@ namespace SeaBattle.View
             _isGameOver = false;
             _player = _mainWindow.Model.FirstPlayer;
             _computerPlayer = _mainWindow.Model.ComputerPlayer;
+            ((ComputerPlayer)_computerPlayer).GetShotMap();
             CellColorConverter.SetColor(playerFieldController.canvas.Children, _mainWindow.Model.FirstPlayer.Field.Cells);
             //CellColorConverter.SetColor(computerFieldController.canvas.Children, _mainWindow.Model.ComputerPlayer.Field.Cells);
             computerFieldController.canvas.PreviewMouseLeftButtonDown += Canvas_PreviewMouseLeftButtonDown;
@@ -50,6 +51,12 @@ namespace SeaBattle.View
 
                 PlayerShot(Field.DecartToLine(x, y));
             }
+            if (!_isGameOver)
+            {
+                _computerPlayer.AttackPlayer(_player, _computerPlayer.GetNextCell(), CellStatus.ComputerShot);
+                CellColorConverter.SetColorOfCell(playerFieldController.canvas.Children, _player.PlacementHist.History);
+            }
+
         }
 
         private void PlayerShot(int coordinate)
