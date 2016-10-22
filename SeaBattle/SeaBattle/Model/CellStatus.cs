@@ -10,6 +10,10 @@ namespace SeaBattle.Model
     {
         ShipOn = -2,
         Busy,
-        Empty
+        Empty,
+        PlayerShot,
+        PlayerShip,
+        ComputerShot,
+        ComputerShip
     }
 }

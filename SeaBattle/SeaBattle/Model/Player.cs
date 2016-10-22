@@ -8,7 +8,6 @@ namespace SeaBattle.Model
 {
     public class Player : AbstractPlayer
     {
-
         public Player()
             : base()
         {

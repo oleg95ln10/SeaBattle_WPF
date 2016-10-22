@@ -10,12 +10,12 @@ namespace SeaBattle.ViewModel
     public class MainViewModel
     {
         Player _firstPlayer;
-        AbstractPlayer _secondPlayer;
+        AbstractPlayer _computerPlayer;
 
         public MainViewModel()
         {
             _firstPlayer = new Player();
-            _secondPlayer = new Player();
+            _computerPlayer = new Player();
         }
 
         public Player FirstPlayer
@@ -23,10 +23,10 @@ namespace SeaBattle.ViewModel
             get { return _firstPlayer; }
             set {_firstPlayer = value; }
         }
-        public AbstractPlayer SecondPlayer
+        public AbstractPlayer ComputerPlayer
         {
-            get {return _secondPlayer; }
-            set {_secondPlayer = value; }
+            get {return _computerPlayer; }
+            set {_computerPlayer = value; }
         }
     }
 }

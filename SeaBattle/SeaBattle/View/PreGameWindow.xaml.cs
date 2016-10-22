@@ -20,11 +20,10 @@ namespace SeaBattle.View
         private int[] _shipArray;
         private bool _isShipCanPlace;
         private int _currentShip;
-        Point _mousePosition;
-        Point _zeroShipPosition;
-        ShipDirection _shipDirection;
+        private Point _mousePosition;
+        private Point _zeroShipPosition;
+        private ShipDirection _shipDirection;
         private MainWindow _mainWindow;
-
         public PreGameWindow(MainWindow mainWindow)
         {
             InitializeComponent();
@@ -69,7 +68,6 @@ namespace SeaBattle.View
                     ship.Visibility = Visibility.Hidden;
                     StartGameButton_PreviewMouseLeftButtonDown(sender, null);
                 }
-
             }
         }
         private void ship_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -118,8 +116,7 @@ namespace SeaBattle.View
         }
         private void ChangeShipCellsColor()
         {
-            UIElementCollection childs = fieldController.canvas.Children;
-            CellColorConverter.SetColor(ref childs, _model.FirstPlayer.Field.Cells);
+            CellColorConverter.SetColor(fieldController.canvas.Children, _model.FirstPlayer.Field.Cells);
         }
         private void HideControls()
         {
@@ -138,15 +135,13 @@ namespace SeaBattle.View
             ChangeShipCellsColor();
             HideControls();
         }
-
         private void StartGameButton_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             HideControls();
-            _mainWindow.Model.SecondPlayer.AutomaticShipPlacing();
+            _mainWindow.Model.ComputerPlayer.AutomaticShipPlacing();
             Game gameWindow = new Game(_mainWindow);
-            gameWindow.ShowDialog();
             this.Close();
+            gameWindow.ShowDialog();
         }
-
     }
 }

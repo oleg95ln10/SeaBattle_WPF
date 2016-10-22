@@ -5,6 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SeaBattle.View"
         mc:Ignorable="d"
-        Title="Game" Height="500" Width="700">
-    <Canvas HorizontalAlignment="Left" Width="690" Background="#FF12AACE"/>
+        Title="Game" Height="383.6" Width="730.667" ResizeMode="NoResize">
+    <Canvas Background="#FF12AACE" Margin="0,0,-6,-0.8">
+        <local:FieldControl Canvas.Left="39" Canvas.Top="53" x:Name="playerFieldController"></local:FieldControl>
+        <Label Name="playerLabel" FontSize="25" Content="YOU FIELD" Canvas.Left="95" Canvas.Top="10"></Label>
+        <Label Name="playerScore" FontSize="25" Content="Score:" Canvas.Left="39" Canvas.Top="304"></Label>
+        <local:FieldControl Canvas.Left="419" Canvas.Top="53" x:Name="computerFieldController"></local:FieldControl>
+        <Label Name="computerLabel" FontSize="25" Content="COMPUTER FIELD" Canvas.Left="443" Canvas.Top="10"></Label>
+        <Label Name="computerScore" FontSize="25" Content="Score:" Canvas.Left="419" Canvas.Top="304"></Label>
+    </Canvas>
 </Window>

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using SeaBattle.Model;
+using SeaBattle.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,11 +22,40 @@ namespace SeaBattle.View
     public partial class Game : Window
     {
         private MainWindow _mainWindow;
+        private bool _isGameOver;
+        // Для уменьшения записи
+        private Player _player;
+        private AbstractPlayer _computerPlayer;
         public Game(MainWindow mainWindow)
         {
             InitializeComponent();
             this._mainWindow = mainWindow;
-             var v =_mainWindow.Model;
+            _isGameOver = false;
+            _player = _mainWindow.Model.FirstPlayer;
+            _computerPlayer = _mainWindow.Model.ComputerPlayer;
+            CellColorConverter.SetColor(playerFieldController.canvas.Children, _mainWindow.Model.FirstPlayer.Field.Cells);
+            //CellColorConverter.SetColor(computerFieldController.canvas.Children, _mainWindow.Model.ComputerPlayer.Field.Cells);
+            computerFieldController.canvas.PreviewMouseLeftButtonDown += Canvas_PreviewMouseLeftButtonDown;
+        }
+
+        private void Canvas_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            var mousePositionOnElement = e.GetPosition(computerFieldController.canvas);
+            var x = (int)(mousePositionOnElement.X / Cell.CellSize);
+            var y = (int)(mousePositionOnElement.Y / Cell.CellSize);
+            if (!_isGameOver 
+                && 
+                _player.IsCanOpponentBeAttacked(_computerPlayer, Field.DecartToLine(x, y)))
+            {
+
+                PlayerShot(Field.DecartToLine(x, y));
+            }
+        }
+
+        private void PlayerShot(int coordinate)
+        {
+            _player.AttackPlayer(_computerPlayer, coordinate);
+            CellColorConverter.SetColorOfCell(computerFieldController.canvas.Children, _computerPlayer.PlacementHist.History);              
         }
     }
 }

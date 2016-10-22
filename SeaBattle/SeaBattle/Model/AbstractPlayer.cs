@@ -12,13 +12,15 @@ namespace SeaBattle.Model
         private int _score;
         private Field _field;
         private PlacementHistory _placementHist;
-        private Random _r;
+        private int _shipCount;// Количество клеток, занимаемых кораблями (сумма чисел в ShipArray)
+        private static Random _r;
         public static readonly int[] ShipArray = { 1, 1, 1, 1, 2, 2, 2, 3, 3, 4 };
         public AbstractPlayer()
         {
             _field = new Field();
             _placementHist = new PlacementHistory();
             _r = new Random();
+            _shipCount = 20;
         }
         #region Properties
         public int Score
@@ -41,6 +43,11 @@ namespace SeaBattle.Model
             get { return _placementHist;  }
             set { _placementHist = value; }
         }
+        public int ShipCount
+        {
+            get { return _shipCount;  }
+            set { _shipCount = value; }
+        }
         #endregion
         public void ResetField()
         {
@@ -51,8 +58,6 @@ namespace SeaBattle.Model
         }
         public void AutomaticShipPlacing()
         {
-            //Если верить математике, у нас будет всегда как минимум 1 расстановка кораблей, 
-            // удовлетворяющая правлам, если начать расставлять с наибольшего корабля
             var tempShipArray = (int [])ShipArray.Clone();
             Array.Reverse(tempShipArray);
             ShipDirection shipDirection;
@@ -111,6 +116,27 @@ namespace SeaBattle.Model
                 }
             }
             return false;
+        }
+        public bool IsCanOpponentBeAttacked(AbstractPlayer _player, int indexOfFieldCell, CellStatus shotType = CellStatus.PlayerShot)
+        {
+            if (indexOfFieldCell >= 0 && indexOfFieldCell < _player.Field.Cells.Count)
+            if (_player.Field.Cells[indexOfFieldCell].CellValue != shotType && !_player.PlacementHist.History.ContainsKey(indexOfFieldCell))
+                return true;
+            return false;
+        }
+        public void AttackPlayer(AbstractPlayer _player, int indexOfFieldCell, CellStatus shotType = CellStatus.PlayerShot)
+        {
+            if (IsCanOpponentBeAttacked(_player, indexOfFieldCell, shotType))
+            {
+                if (_player.Field.Cells[indexOfFieldCell].CellValue == CellStatus.ShipOn)
+                AddValuesToDictAndField(indexOfFieldCell, _player.PlacementHist.History, CellStatus.ComputerShip);
+                else
+                    AddValuesToDictAndField(indexOfFieldCell, _player.PlacementHist.History, CellStatus.PlayerShot);
+            }
+        }
+        public void AutoMove()
+        {
+
         }
         private void PlaceHorizontalShip(int x, int y, int shipLenght)
         {
@@ -237,6 +263,11 @@ namespace SeaBattle.Model
         {
             Field.Cells[ key ].CellValue = status;
             PlacementHist.History.Add( key, status );
+        }
+        protected void AddValuesToDictAndField(int key, Dictionary<int,CellStatus> historyContainer, CellStatus status = CellStatus.Busy)
+        {
+            Field.Cells[key].CellValue = status;
+            historyContainer.Add(key, status);
         }
     }
 }
