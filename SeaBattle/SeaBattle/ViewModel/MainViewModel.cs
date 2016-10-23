@@ -14,11 +14,10 @@ namespace SeaBattle.ViewModel
     {
         Player _firstPlayer;
         ComputerPlayer _computerPlayer;
-
         public MainViewModel()
         {
             _firstPlayer = new Player();
-            _computerPlayer = new ComputerPlayer();
+            _computerPlayer = new ComputerPlayer("oneByOne.txt",false);
         }
 
         public Player FirstPlayer

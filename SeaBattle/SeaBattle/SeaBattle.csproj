@@ -55,7 +55,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Model\IAIPlayer.cs" />
     <Compile Include="Model\Cell.cs" />
     <Compile Include="Model\CellStatus.cs" />
     <Compile Include="Model\ComputerPlayer.cs" />

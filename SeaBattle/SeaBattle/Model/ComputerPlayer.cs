@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,26 +11,38 @@ namespace SeaBattle.Model
     /// Класс для реализации компьютерного игрока
     /// Реализует класс для ИИ
     /// </summary>
-    public class ComputerPlayer : AbstractPlayer, IAIPlayer
+    public class ComputerPlayer : AbstractPlayer
     {
         List<int> _shotMap;// Карта обстрела корабля противника
         static Random _r;
         int _currentnumbOfCell;// Текущая ячейка из карты обстрела
-        public ComputerPlayer()
+        public ComputerPlayer(string mapFilename, bool isRandomMap = true)
             :base()
         {
             _shotMap = new List<int>();
             _r = new Random();
-            _currentnumbOfCell = 0;
-            GetShotMap();
-        }
 
-        /// <summary>
-        /// Реализация интерфейса IAIPlayer
-        /// Заполнить карту числами от 1 до 99
-        /// и перемешать
-        /// </summary>
-        public void GetShotMap()
+            if (!isRandomMap)
+            {
+                using (FileStream stream = new FileStream(mapFilename, FileMode.Open))
+                {
+                    byte[] array = new byte[stream.Length];
+
+                    stream.Read(array, 0, array.Length);
+
+                    foreach (var b in array)
+                    {
+                        _shotMap.Add(Convert.ToInt32(b));
+                    }
+                }
+            }
+            else
+                GetShotMap();
+
+            _currentnumbOfCell = 0;
+
+        }
+        public virtual void GetShotMap()
         {
             try
             {
@@ -66,7 +79,6 @@ namespace SeaBattle.Model
                 throw new Exception(e.Message);
             }
         }
-
         /// <summary>
         /// Извлечь следущую ячейку для обстрела
         /// </summary>
@@ -88,5 +100,6 @@ namespace SeaBattle.Model
                 throw new Exception(e.Message);
             }
         }
+
     }
 }

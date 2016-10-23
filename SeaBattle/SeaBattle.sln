@@ -1,9 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SeaBattle", "SeaBattle\SeaBattle.csproj", "{58A6A738-85AB-4376-A68A-1563C56AE05B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModeDLL", "ModeDLL\ModeDLL.csproj", "{885E631D-FE29-4362-8975-9A3EDE3954CC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModeCreator", "ModeCreator\ModeCreator.csproj", "{AC36F380-F1EE-45C5-90B5-DABDD1C4BEBB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{58A6A738-85AB-4376-A68A-1563C56AE05B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{58A6A738-85AB-4376-A68A-1563C56AE05B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{58A6A738-85AB-4376-A68A-1563C56AE05B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{885E631D-FE29-4362-8975-9A3EDE3954CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{885E631D-FE29-4362-8975-9A3EDE3954CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{885E631D-FE29-4362-8975-9A3EDE3954CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{885E631D-FE29-4362-8975-9A3EDE3954CC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AC36F380-F1EE-45C5-90B5-DABDD1C4BEBB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC36F380-F1EE-45C5-90B5-DABDD1C4BEBB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC36F380-F1EE-45C5-90B5-DABDD1C4BEBB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC36F380-F1EE-45C5-90B5-DABDD1C4BEBB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

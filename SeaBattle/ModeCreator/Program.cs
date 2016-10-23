@@ -4,11 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SeaBattle.Model
+namespace ModeCreator
 {
-    interface IAIPlayer
+    class Program
     {
-        void GetShotMap();
-        void Shuffle();
+        static void Main(string[] args)
+        {
+        }
     }
 }
