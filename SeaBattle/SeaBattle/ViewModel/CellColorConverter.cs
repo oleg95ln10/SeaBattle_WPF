@@ -10,6 +10,9 @@ using System.Windows.Media;
 
 namespace SeaBattle.ViewModel
 {
+    /// <summary>
+    /// Вспомогательный класс для удобства расцветки ячеек поля
+    /// </summary>
     public static class CellColorConverter
     {
         public static void SetColorOfCell(UIElementCollection collection, Dictionary<int, CellStatus> history)

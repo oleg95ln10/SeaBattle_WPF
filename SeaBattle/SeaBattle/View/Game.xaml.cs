@@ -18,13 +18,14 @@ namespace SeaBattle.View
 {
     /// <summary>
     /// Interaction logic for Game.xaml
+    /// Окно для игрового проуесса
     /// </summary>
     public partial class Game : Window
     {
-        private MainWindow _mainWindow;
-        private bool _isGameOver;
-        private bool _isComputerCanShot;
-        private bool _isPlayerCanShot;
+        private MainWindow _mainWindow;// Главное окно для возможного возврата
+        private bool _isGameOver;// Флаг окончания игры
+        private bool _isComputerCanShot;// Флаг возможности стрельбы компьютера
+        private bool _isPlayerCanShot;// Флаг возможности стрельбы игрока
         // Для уменьшения записи
         private Player _player;
         private ComputerPlayer _computerPlayer;
@@ -43,48 +44,62 @@ namespace SeaBattle.View
 
         private void Canvas_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            var mousePositionOnElement = e.GetPosition(computerFieldController.canvas);
-            var x = (int)(mousePositionOnElement.X / Cell.CellSize);
-            var y = (int)(mousePositionOnElement.Y / Cell.CellSize);
-            if (!_isGameOver 
-                && 
-                _isPlayerCanShot
-                &&
-                _player.IsCanOpponentBeAttacked(_computerPlayer, 
-                                                Field.DecartToLine(x, y), 
-                                                CellStatus.PlayerShot, 
-                                                CellStatus.ComputerShip))
+            try
             {
-                _player.AttackPlayer(_computerPlayer, Field.DecartToLine(x,y), CellStatus.ShipOn, CellStatus.PlayerShot);
-                CellColorConverter.SetColorOfCell(computerFieldController.canvas.Children, _player.PlacementHist.History);
+                // Получение координат мыши
+                var mousePositionOnElement = e.GetPosition(computerFieldController.canvas);
+                var x = (int)(mousePositionOnElement.X / Cell.CellSize);
+                var y = (int)(mousePositionOnElement.Y / Cell.CellSize);
+                // Ход игрока
+                if (!_isGameOver
+                    &&
+                    _isPlayerCanShot
+                    &&
+                    _player.IsCanOpponentBeAttacked(_computerPlayer,
+                                                    Field.DecartToLine(x, y),
+                                                    CellStatus.PlayerShot,
+                                                    CellStatus.ComputerShip))
+                {
+                    _player.AttackPlayer(_computerPlayer, Field.DecartToLine(x, y), CellStatus.ShipOn, CellStatus.PlayerShot);
+                    CellColorConverter.SetColorOfCell(computerFieldController.canvas.Children, _player.PlacementHist.History);
 
-                playerScoreValue.Content = _player.Score;
+                    playerScoreValue.Content = _player.Score;
 
-                if (_player.IsShotOnShip)
-                    _isPlayerCanShot = true;
-                else
-                    _isComputerCanShot = true;
+                    if (_player.IsShotOnShip)
+                        _isPlayerCanShot = true;
+                    else
+                        _isComputerCanShot = true;
+                }
+                // Ход компьютера
+                if (!_isGameOver && _isComputerCanShot)
+                {
+                    _computerPlayer.AttackPlayer(_player, _computerPlayer.GetNextCell(), CellStatus.ComputerShot, CellStatus.ComputerShip);
+                    CellColorConverter.SetColorOfCell(playerFieldController.canvas.Children, _computerPlayer.PlacementHist.History);
+
+                    computerScoreValue.Content = _computerPlayer.Score;
+
+                    if (_computerPlayer.IsShotOnShip)
+                    {
+                        _isPlayerCanShot = false;
+                        Canvas_PreviewMouseLeftButtonDown(sender, e);
+                    }
+                    else
+                    {
+                        _isComputerCanShot = false;
+                        _isPlayerCanShot = true;
+                    }
+                }
+                TryFindWinner();
             }
-            if (!_isGameOver && _isComputerCanShot)
+            catch (Exception ex)
             {
-                _computerPlayer.AttackPlayer(_player, _computerPlayer.GetNextCell(), CellStatus.ComputerShot, CellStatus.ComputerShip);
-                CellColorConverter.SetColorOfCell(playerFieldController.canvas.Children, _computerPlayer.PlacementHist.History);
-
-                computerScoreValue.Content = _computerPlayer.Score;
-
-                if (_computerPlayer.IsShotOnShip)
-                {
-                    _isPlayerCanShot = false;
-                    Canvas_PreviewMouseLeftButtonDown(sender, e);
-                }
-                else
-                {
-                    _isComputerCanShot = false;
-                    _isPlayerCanShot = true;
-                }
+                MessageBox.Show(ex.Message);
             }
-            TryFindWinner();
+
         }
+        /// <summary>
+        /// Метод для определения победителя
+        /// </summary>
         private void TryFindWinner()
         {
             if (_player.ShipCount == 0)

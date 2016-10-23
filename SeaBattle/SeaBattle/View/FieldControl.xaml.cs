@@ -18,6 +18,7 @@ namespace SeaBattle.View
 {
     /// <summary>
     /// Interaction logic for FieldControl.xaml
+    /// Пользовательский контроллер для отображения поля
     /// </summary>
     public partial class FieldControl : UserControl
     {
@@ -30,17 +31,25 @@ namespace SeaBattle.View
         }
         private void DrawField()
         {
-            for (int i = 0; i < 10; ++i)
+            try
             {
-                for (int j = 0; j < 10; ++j)
+                for (int i = 0; i < 10; ++i)
                 {
-                    _cells[i, j] = new Button() { Width = Cell.CellSize, Height = Cell.CellSize };
-                    _cells[i, j].Name = "button_" + i.ToString() + j.ToString();
-                    Canvas.SetLeft(_cells[i, j], 0 + j * Cell.CellSize);
-                    Canvas.SetTop(_cells[i, j], 0 + i * Cell.CellSize);
-                    canvas.Children.Add(_cells[i, j]);
+                    for (int j = 0; j < 10; ++j)
+                    {
+                        _cells[i, j] = new Button() { Width = Cell.CellSize, Height = Cell.CellSize };
+                        _cells[i, j].Name = "button_" + i.ToString() + j.ToString();
+                        Canvas.SetLeft(_cells[i, j], 0 + j * Cell.CellSize);
+                        Canvas.SetTop(_cells[i, j], 0 + i * Cell.CellSize);
+                        canvas.Children.Add(_cells[i, j]);
+                    }
                 }
             }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+
         }
     }
 }

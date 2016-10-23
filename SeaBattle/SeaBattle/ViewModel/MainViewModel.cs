@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace SeaBattle.ViewModel
 {
+    /// <summary>
+    /// Класс модель
+    /// </summary>
     public class MainViewModel
     {
         Player _firstPlayer;

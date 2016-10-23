@@ -62,7 +62,6 @@
     <Compile Include="Model\Field.cs" />
     <Compile Include="Model\PlacementHistory.cs" />
     <Compile Include="Model\ShipDirection.cs" />
-    <Compile Include="Model\ShipStatus.cs" />
     <Compile Include="ViewModel\CellColorConverter.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="View\FieldControl.xaml.cs">
@@ -76,9 +75,6 @@
     </Compile>
     <Compile Include="View\PreGameWindow.xaml.cs">
       <DependentUpon>PreGameWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\TabOfLeaders.xaml.cs">
-      <DependentUpon>TabOfLeaders.xaml</DependentUpon>
     </Compile>
     <Page Include="View\FieldControl.xaml">
       <SubType>Designer</SubType>
@@ -102,16 +98,11 @@
     </Compile>
     <Compile Include="Model\AbstractPlayer.cs" />
     <Compile Include="Model\Player.cs" />
-    <Compile Include="Model\TypeOfShips.cs" />
     <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
     <Page Include="View\PreGameWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\TabOfLeaders.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

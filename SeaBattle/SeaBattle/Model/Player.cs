@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace SeaBattle.Model
 {
+    /// <summary>
+    /// Класс для реализации игрока - человека
+    /// </summary>
     public class Player : AbstractPlayer
     {
         public Player()

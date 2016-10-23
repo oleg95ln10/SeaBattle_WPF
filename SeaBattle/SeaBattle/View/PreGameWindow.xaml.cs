@@ -12,18 +12,19 @@ namespace SeaBattle.View
 {
     /// <summary>
     /// Interaction logic for PreGameWindow.xaml
+    /// Окно для расстановки пользовательских кораблей
     /// </summary>
     public partial class PreGameWindow : Window
     {
-        private MainViewModel _model;
-        private bool _isCanmove;
-        private int[] _shipArray;
-        private bool _isShipCanPlace;
-        private int _currentShip;
-        private Point _mousePosition;
-        private Point _zeroShipPosition;
-        private ShipDirection _shipDirection;
-        private MainWindow _mainWindow;
+        private MainViewModel _model;// Модель из шлавного окна
+        private bool _isCanmove;// Может ли игрок ходить 
+        private int[] _shipArray;// Массив кораблей
+        private bool _isShipCanPlace;// Можно ли поставить корабль
+        private int _currentShip;// Длина текущего корабля
+        private Point _mousePosition;// Позиция мыши
+        private Point _zeroShipPosition;// Начальное положение кнопки "корабля"
+        private ShipDirection _shipDirection;// Направление корабля
+        private MainWindow _mainWindow;// Главное окно для возможного возврата
         public PreGameWindow(MainWindow mainWindow)
         {
             InitializeComponent();
@@ -33,115 +34,213 @@ namespace SeaBattle.View
         }
         private void Init()
         {
-            _shipArray = new int[ AbstractPlayer.ShipArray.Length ];
-            _shipArray = (int[])AbstractPlayer.ShipArray.Clone();
-            _currentShip = _shipArray.Max();
-            _shipArray.SetValue( -100, Array.IndexOf(_shipArray, _shipArray.Max() ) );
-            ship.Height = Cell.CellSize - 2;
-            ship.Width = ( Cell.CellSize - 2 ) * _currentShip;
-            _zeroShipPosition = new Point( Canvas.GetLeft( ship ), Canvas.GetTop( ship ) );
-            _isShipCanPlace = true;
-            _isCanmove = false;
-            _model.FirstPlayer.ResetField();
-            _shipDirection = ShipDirection.Horizontal;
+            try
+            {
+                _shipArray = new int[AbstractPlayer.SHIPARRAY.Length];
+                _shipArray = (int[])AbstractPlayer.SHIPARRAY.Clone();
+                _currentShip = _shipArray.Max();
+                _shipArray.SetValue(-100, Array.IndexOf(_shipArray, _shipArray.Max()));
+                ship.Height = Cell.CellSize - 2;
+                ship.Width = (Cell.CellSize - 2) * _currentShip;
+                _zeroShipPosition = new Point(Canvas.GetLeft(ship), Canvas.GetTop(ship));
+                _isShipCanPlace = true;
+                _isCanmove = false;
+                _model.FirstPlayer.ResetField();
+                _shipDirection = ShipDirection.Horizontal;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
         }
+
         private void FieldController_PreviewMouseLeftButtonDown(object sender)
         {
-            Button selectedButton = sender as Button;
-            var x = (int)( Canvas.GetLeft( selectedButton) / Cell.CellSize );
-            var y = (int)( Canvas.GetTop( selectedButton) / Cell.CellSize );
-
-            if ( _model.FirstPlayer.IsCanBePlaced( x, y, _currentShip, _shipDirection ) )
-                _isShipCanPlace = true;
-            else
-               _isShipCanPlace = false;
-
-            if ( Mouse.GetPosition( this ).X < 250 && Mouse.GetPosition( this ).Y < 243 && _isShipCanPlace )
+            try
             {
-                PlaceShipOnMap( x, y );
-                Canvas.SetLeft( ship, _zeroShipPosition.X );
-                Canvas.SetTop( ship, _zeroShipPosition.Y );
-                if ( _shipArray.Max() > 0 )
-                    GetShip();
+                Button selectedButton = sender as Button;
+                var x = (int)(Canvas.GetLeft(selectedButton) / Cell.CellSize);
+                var y = (int)(Canvas.GetTop(selectedButton) / Cell.CellSize);
+
+                if (_model.FirstPlayer.IsCanBePlaced(x, y, _currentShip, _shipDirection))
+                    _isShipCanPlace = true;
                 else
+                    _isShipCanPlace = false;
+
+                if (Mouse.GetPosition(this).X < 250 && Mouse.GetPosition(this).Y < 243 && _isShipCanPlace)
                 {
-                    ship.Visibility = Visibility.Hidden;
-                    StartGameButton_PreviewMouseLeftButtonDown(sender, null);
+                    PlaceShipOnMap(x, y);
+                    Canvas.SetLeft(ship, _zeroShipPosition.X);
+                    Canvas.SetTop(ship, _zeroShipPosition.Y);
+                    if (_shipArray.Max() > 0)
+                        GetShip();
+                    else
+                    {
+                        ship.Visibility = Visibility.Hidden;
+                        StartGameButton_PreviewMouseLeftButtonDown(sender, null);
+                    }
                 }
             }
-        }
-        private void ship_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            Button but = sender as Button;
-            Mouse.Capture( but );
-            _mousePosition = Mouse.GetPosition( but );
-            _isCanmove = true;
-        }
-        private void ship_PreviewMouseMove(object sender, MouseEventArgs e)
-        {
-            if ( _isCanmove )
+            catch (Exception ex)
             {
-                Button shipButton = sender as Button;
-                shipButton.SetValue( Canvas.LeftProperty, e.GetPosition( null ).X - _mousePosition.X );
-                shipButton.SetValue( Canvas.TopProperty, e.GetPosition( null ).Y - _mousePosition.Y );
+                MessageBox.Show(ex.Message);
             }
         }
-        private void ship_PreviewMouseUp(object sender, MouseButtonEventArgs e)
+
+        private void Ship_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            Mouse.Capture( null );
-            _isCanmove = false;
-            FieldController_PreviewMouseLeftButtonDown( sender );
+            try
+            {
+                Button but = sender as Button;
+                Mouse.Capture(but);
+                _mousePosition = Mouse.GetPosition(but);
+                _isCanmove = true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
+
+        private void Ship_PreviewMouseMove(object sender, MouseEventArgs e)
+        {
+            try
+            {
+                if (_isCanmove)
+                {
+                    Button shipButton = sender as Button;
+                    shipButton.SetValue(Canvas.LeftProperty, e.GetPosition(null).X - _mousePosition.X);
+                    shipButton.SetValue(Canvas.TopProperty, e.GetPosition(null).Y - _mousePosition.Y);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void Ship_PreviewMouseUp(object sender, MouseButtonEventArgs e)
+        {
+            try
+            {
+                Mouse.Capture(null);
+                _isCanmove = false;
+                FieldController_PreviewMouseLeftButtonDown(sender);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
         private void HorizontalButton_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            ship.LayoutTransform = new RotateTransform( 0 );
-            _shipDirection = ShipDirection.Horizontal;
+            try
+            {
+                ship.LayoutTransform = new RotateTransform(0);
+                _shipDirection = ShipDirection.Horizontal;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
+
         private void VerticalButton_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            ship.LayoutTransform = new RotateTransform( 90 );
-            _shipDirection = ShipDirection.Vertical;
+            try
+            {
+                ship.LayoutTransform = new RotateTransform(90);
+                _shipDirection = ShipDirection.Vertical;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
+
         private void GetShip()
         {
-            ship.Width = Cell.CellSize * _shipArray.Max();
-            _currentShip = _shipArray.Max();
-            _shipArray.SetValue(-100, Array.IndexOf( _shipArray, _shipArray.Max() ) );
+            try
+            {
+                ship.Width = Cell.CellSize * _shipArray.Max();
+                _currentShip = _shipArray.Max();
+                _shipArray.SetValue(-100, Array.IndexOf(_shipArray, _shipArray.Max()));
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
+
         private void PlaceShipOnMap(int x, int y)
         {
-            _model.FirstPlayer.PlaceShips(x, y, _currentShip, _shipDirection);
-            ChangeShipCellsColor();
-            _model.FirstPlayer.PlacementHist.History.Clear();
+            try
+            {
+                _model.FirstPlayer.PlaceShips(x, y, _currentShip, _shipDirection);
+                ChangeShipCellsColor();
+                _model.FirstPlayer.PlacementHist.History.Clear();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
+
         private void ChangeShipCellsColor()
         {
             CellColorConverter.SetColor(fieldController.canvas.Children, _model.FirstPlayer.Field.Cells);
         }
+
         private void HideControls()
         {
-            startGameButton.Visibility = Visibility.Visible;
-            ship.Visibility = Visibility.Hidden;
-            automaticShipGeneration.Visibility = Visibility.Hidden;
-            startGameButton.Visibility = Visibility.Visible;
-            horizontalShipPlacingButton.Visibility = Visibility.Hidden;
-            verticalShipPlacingButton.Visibility = Visibility.Hidden;
-            shipDirectionLabel.Content = "";
-            shipPutLabel.Content = "";
+            try
+            {
+                startGameButton.Visibility = Visibility.Visible;
+                ship.Visibility = Visibility.Hidden;
+                automaticShipGeneration.Visibility = Visibility.Hidden;
+                startGameButton.Visibility = Visibility.Visible;
+                horizontalShipPlacingButton.Visibility = Visibility.Hidden;
+                verticalShipPlacingButton.Visibility = Visibility.Hidden;
+                shipDirectionLabel.Content = "";
+                shipPutLabel.Content = "";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
+
         private void AutomaticShipGeneration_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            _model.FirstPlayer.AutomaticShipPlacing();
-            ChangeShipCellsColor();
-            HideControls();
+            try
+            {
+                _model.FirstPlayer.AutomaticShipPlacing();
+                ChangeShipCellsColor();
+                HideControls();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
+
         private void StartGameButton_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            HideControls();
-            _mainWindow.Model.ComputerPlayer.AutomaticShipPlacing();
-            Game gameWindow = new Game(_mainWindow);
-            this.Close();
-            gameWindow.ShowDialog();
+            try
+            {
+                HideControls();
+                _mainWindow.Model.ComputerPlayer.AutomaticShipPlacing();
+                Game gameWindow = new Game(_mainWindow);
+                this.Close();
+                gameWindow.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
+
     }
 }

@@ -10,7 +10,7 @@
         <local:FieldControl x:Name="fieldController" HorizontalAlignment="Left" Width="258" Height="250" Canvas.Left="5"/>
         <Label Name="shipPutLabel" Content="Choose ships for put:" Canvas.Left="262"/>
         <Label Name="shipDirectionLabel" Content="How to place ship?" Canvas.Left="268" Canvas.Top="158"></Label>
-        <Button Name="ship" PreviewMouseLeftButtonDown="ship_PreviewMouseLeftButtonDown" PreviewMouseMove="ship_PreviewMouseMove" PreviewMouseUp="ship_PreviewMouseUp" Canvas.Left="268" Canvas.Top="62" RenderTransformOrigin="0.5,0.5"></Button>
+        <Button Name="ship" PreviewMouseLeftButtonDown="Ship_PreviewMouseLeftButtonDown" PreviewMouseMove="Ship_PreviewMouseMove" PreviewMouseUp="Ship_PreviewMouseUp" Canvas.Left="268" Canvas.Top="62" RenderTransformOrigin="0.5,0.5"></Button>
         <Button Name="horizontalShipPlacingButton" Content="Horizontal" Canvas.Left="263" Canvas.Top="189" Width="121" PreviewMouseLeftButtonDown="HorizontalButton_MouseLeftButtonDown"></Button>
         <Button Name="verticalShipPlacingButton" Content="Vertical" Canvas.Left="263" Canvas.Top="228" Width="121" PreviewMouseLeftButtonDown="VerticalButton_MouseLeftButtonDown"></Button>
         <Button Name="automaticShipGeneration" Height="40" Width="394" Canvas.Top="255" Content = "Auto placing" PreviewMouseLeftButtonDown="AutomaticShipGeneration_PreviewMouseLeftButtonDown"></Button>

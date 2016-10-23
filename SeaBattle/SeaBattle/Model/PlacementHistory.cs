@@ -22,6 +22,7 @@ namespace SeaBattle.Model
         {
             _history = new Dictionary<int, CellStatus>();
         }
+
         public Dictionary<int, CellStatus> History
         {
             get  { return _history; }

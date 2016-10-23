@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace SeaBattle.Model
 {
+    /// <summary>
+    /// Перечисление для установки размещения кораблей
+    /// </summary>
     public enum ShipDirection
     {
         Horizontal,

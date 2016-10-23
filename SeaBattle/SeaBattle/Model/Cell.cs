@@ -7,13 +7,16 @@ using System.Windows;
 
 namespace SeaBattle.Model
 {
-    public class Cell : DependencyObject
+    /// <summary>
+    /// Класс для описания ячейки поля
+    /// </summary>
+    public class Cell
     {
         public static readonly int CellSize = 25;
         private CellStatus _cellValue;
         public Cell()
         {
-            _cellValue = (int)CellStatus.Empty;
+            _cellValue = CellStatus.Empty;
         }
         public CellStatus CellValue
         {

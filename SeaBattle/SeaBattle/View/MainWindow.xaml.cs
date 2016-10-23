@@ -37,20 +37,34 @@ namespace SeaBattle
         }
         private void StartGameButton_Click(object sender, RoutedEventArgs e)
         {
-            PreGameWindow pg = new PreGameWindow(this);
-            this.Close();
-            pg.ShowDialog();
+            try
+            {
+                PreGameWindow pg = new PreGameWindow(this);
+                this.Close();
+                pg.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            this.Visibility = Visibility.Collapsed;
-            LeaderTable lt = new LeaderTable();
-            lt.Closed += (sender2, e2) =>
+            try
             {
-                this.Visibility = Visibility.Visible;
-            };
-            lt.ShowDialog();
+                this.Visibility = Visibility.Collapsed;
+                LeaderTable lt = new LeaderTable();
+                lt.Closed += (sender2, e2) =>
+                {
+                    this.Visibility = Visibility.Visible;
+                };
+                lt.ShowDialog();
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }

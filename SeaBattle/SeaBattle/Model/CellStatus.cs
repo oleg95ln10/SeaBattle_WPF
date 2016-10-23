@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace SeaBattle.Model
 {
+    /// <summary>
+    /// Перечисление для отображения статуса ячейки
+    /// </summary>
     public enum CellStatus
     {
         ShipOn = -2,
