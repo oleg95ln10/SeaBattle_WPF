@@ -10,8 +10,11 @@
         <local:FieldControl Canvas.Left="39" Canvas.Top="53" x:Name="playerFieldController"></local:FieldControl>
         <Label Name="playerLabel" FontSize="25" Content="YOU FIELD" Canvas.Left="95" Canvas.Top="10"></Label>
         <Label Name="playerScore" FontSize="25" Content="Score:" Canvas.Left="39" Canvas.Top="304"></Label>
+        <Label Name="playerScoreValue" FontSize="25" Canvas.Left="121" Canvas.Top="304" Height="43" Width="149"></Label>
+
         <local:FieldControl Canvas.Left="419" Canvas.Top="53" x:Name="computerFieldController"></local:FieldControl>
         <Label Name="computerLabel" FontSize="25" Content="COMPUTER FIELD" Canvas.Left="443" Canvas.Top="10"></Label>
         <Label Name="computerScore" FontSize="25" Content="Score:" Canvas.Left="419" Canvas.Top="304"></Label>
+        <Label Name="computerScoreValue" FontSize="25" Canvas.Left="501" Canvas.Top="304" Height="49" Width="155"></Label>
     </Canvas>
 </Window>

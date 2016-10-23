@@ -14,6 +14,8 @@ namespace SeaBattle.Model
         private PlacementHistory _placementHist;
         private int _shipCount;// Количество клеток, занимаемых кораблями (сумма чисел в ShipArray)
         private static Random _r;
+        private bool _isShotOnShip;
+        private int _move;
         public static readonly int[] ShipArray = { 1, 1, 1, 1, 2, 2, 2, 3, 3, 4 };
         public AbstractPlayer()
         {
@@ -21,6 +23,8 @@ namespace SeaBattle.Model
             _placementHist = new PlacementHistory();
             _r = new Random();
             _shipCount = 20;
+            _move = 0;
+            // Добавить подсчет кораблей
         }
         #region Properties
         public int Score
@@ -47,6 +51,12 @@ namespace SeaBattle.Model
         {
             get { return _shipCount;  }
             set { _shipCount = value; }
+        }
+
+        public bool IsShotOnShip
+        {
+            get { return _isShotOnShip; }
+            set { _isShotOnShip = value; }
         }
         #endregion
         public void ResetField()
@@ -131,18 +141,34 @@ namespace SeaBattle.Model
         {
             if (IsCanOpponentBeAttacked(attackingPlayer, indexOfFieldCell,shotType,opponentFindedShip))
             {
+                _move++;
                 if (attackingPlayer.Field.Cells[indexOfFieldCell].CellValue == CellStatus.ShipOn)
                 {
+                    _isShotOnShip = true;
                     attackingPlayer.Field.Cells[indexOfFieldCell].CellValue = opponentFindedShip;
                     PlacementHist.History.Add(indexOfFieldCell, opponentFindedShip);
+                    ChangeScore(attackingPlayer);
+                    attackingPlayer.ShipCount--;
                 }
 
                 else
                 {
+                    _isShotOnShip = false;
                     attackingPlayer.Field.Cells[indexOfFieldCell].CellValue = shotType;
                     PlacementHist.History.Add(indexOfFieldCell, shotType);
                 }
             }
+        }
+        private void ChangeScore(AbstractPlayer attackingPlayer)
+        {
+            if (_move <= 25)
+                _score += 20;
+            else if (_move <= 50)
+                _score += 15;
+            else if (_move <= 75)
+                _score += 10;
+            else
+                _score += 5;
         }
         private void PlaceHorizontalShip(int x, int y, int shipLenght)
         {
