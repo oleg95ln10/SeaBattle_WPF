@@ -117,21 +117,31 @@ namespace SeaBattle.Model
             }
             return false;
         }
-        public bool IsCanOpponentBeAttacked(AbstractPlayer _player, int indexOfFieldCell, CellStatus shotType = CellStatus.PlayerShot)
+        public bool IsCanOpponentBeAttacked(AbstractPlayer attackingPlayer, int indexOfFieldCell, CellStatus playerShotType, CellStatus opponentFindedShip)
         {
-            if (indexOfFieldCell >= 0 && indexOfFieldCell < _player.Field.Cells.Count)
-            if (_player.Field.Cells[indexOfFieldCell].CellValue != shotType && !_player.PlacementHist.History.ContainsKey(indexOfFieldCell))
+            if (indexOfFieldCell >= 0 && indexOfFieldCell < Field.Cells.Count)
+                // Если мы раньше не стреляли по этому полю
+            if ((attackingPlayer.Field.Cells[indexOfFieldCell].CellValue != playerShotType ||
+                    attackingPlayer.Field.Cells[indexOfFieldCell].CellValue != opponentFindedShip)
+                    && !PlacementHist.History.ContainsKey(indexOfFieldCell))
                 return true;
             return false;
         }
-        public void AttackPlayer(AbstractPlayer _player, int indexOfFieldCell, CellStatus shotType = CellStatus.PlayerShot)
+        public void AttackPlayer(AbstractPlayer attackingPlayer, int indexOfFieldCell, CellStatus opponentFindedShip, CellStatus shotType)
         {
-            if (IsCanOpponentBeAttacked(_player, indexOfFieldCell, shotType))
+            if (IsCanOpponentBeAttacked(attackingPlayer, indexOfFieldCell,shotType,opponentFindedShip))
             {
-                if (_player.Field.Cells[indexOfFieldCell].CellValue == CellStatus.ShipOn)
-                AddValuesToDictAndField(indexOfFieldCell, _player.PlacementHist.History, CellStatus.ComputerShip);
+                if (attackingPlayer.Field.Cells[indexOfFieldCell].CellValue == CellStatus.ShipOn)
+                {
+                    attackingPlayer.Field.Cells[indexOfFieldCell].CellValue = opponentFindedShip;
+                    PlacementHist.History.Add(indexOfFieldCell, opponentFindedShip);
+                }
+
                 else
-                    AddValuesToDictAndField(indexOfFieldCell, _player.PlacementHist.History, CellStatus.PlayerShot);
+                {
+                    attackingPlayer.Field.Cells[indexOfFieldCell].CellValue = shotType;
+                    PlacementHist.History.Add(indexOfFieldCell, shotType);
+                }
             }
         }
         private void PlaceHorizontalShip(int x, int y, int shipLenght)
@@ -259,11 +269,6 @@ namespace SeaBattle.Model
         {
             Field.Cells[ key ].CellValue = status;
             PlacementHist.History.Add( key, status );
-        }
-        protected void AddValuesToDictAndField(int key, Dictionary<int,CellStatus> historyContainer, CellStatus status = CellStatus.Busy)
-        {
-            Field.Cells[key].CellValue = status;
-            historyContainer.Add(key, status);
         }
     }
 }

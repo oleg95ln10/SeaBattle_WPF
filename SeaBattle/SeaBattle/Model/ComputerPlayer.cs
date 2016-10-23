@@ -43,7 +43,6 @@ namespace SeaBattle.Model
             if (_currentnumbOfCell < 100)
             {
                 int cell = _shotMap[_currentnumbOfCell];
-                _shotMap.RemoveAt(_currentnumbOfCell);
                 _currentnumbOfCell++;
                 return cell;
             }

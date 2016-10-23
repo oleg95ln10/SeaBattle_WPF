@@ -25,14 +25,14 @@ namespace SeaBattle.ViewModel
                     case CellStatus.Busy:
                         b.Background = Brushes.Yellow;
                         break;
-                    case CellStatus.PlayerShot:
-                        b.Background = Brushes.Blue;
-                        break;
                     case CellStatus.ComputerShip:
                         b.Background = Brushes.HotPink;
                         break;
+                    case CellStatus.PlayerShot:
+                        b.Background = Brushes.DarkBlue;
+                        break;
                     case CellStatus.ComputerShot:
-                        b.Background = Brushes.Black;
+                        b.Background = Brushes.Gray;
                         break;
                 }
             }
