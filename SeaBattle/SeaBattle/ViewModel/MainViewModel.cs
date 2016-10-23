@@ -17,7 +17,7 @@ namespace SeaBattle.ViewModel
         public MainViewModel()
         {
             _firstPlayer = new Player();
-            _computerPlayer = new ComputerPlayer("oneByOne.txt",false);
+            _computerPlayer = new ComputerPlayer(null);
         }
 
         public Player FirstPlayer

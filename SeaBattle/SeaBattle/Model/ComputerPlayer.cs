@@ -13,16 +13,24 @@ namespace SeaBattle.Model
     /// </summary>
     public class ComputerPlayer : AbstractPlayer
     {
-        List<int> _shotMap;// Карта обстрела корабля противника
-        static Random _r;
+        private static Random _r;
+        private List<int> _shotMap;// Карта обстрела корабля противника
+        private string _mapFilename;
+        private bool _isRandomMap;
         int _currentnumbOfCell;// Текущая ячейка из карты обстрела
         public ComputerPlayer(string mapFilename, bool isRandomMap = true)
             :base()
         {
             _shotMap = new List<int>();
             _r = new Random();
+            _isRandomMap = isRandomMap;
+            _mapFilename = mapFilename;
+            _currentnumbOfCell = 0;
+        }
 
-            if (!isRandomMap)
+        public void GenerateMap(bool isRandomMap, string mapFilename)
+        {
+            if (!isRandomMap && mapFilename != null)
             {
                 using (FileStream stream = new FileStream(mapFilename, FileMode.Open))
                 {
@@ -38,11 +46,9 @@ namespace SeaBattle.Model
             }
             else
                 GetShotMap();
-
-            _currentnumbOfCell = 0;
-
         }
-        public virtual void GetShotMap()
+
+        public void GetShotMap()
         {
             try
             {

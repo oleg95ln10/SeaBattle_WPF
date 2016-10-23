@@ -25,6 +25,8 @@ namespace SeaBattle.View
         private Point _zeroShipPosition;// Начальное положение кнопки "корабля"
         private ShipDirection _shipDirection;// Направление корабля
         private MainWindow _mainWindow;// Главное окно для возможного возврата
+        private bool _isUsePlayerMods;// Использовать ли пользовательские моды
+        private string _fileModeName;// Имя файла с пользовательским модом
         public PreGameWindow(MainWindow mainWindow)
         {
             InitializeComponent();
@@ -47,6 +49,7 @@ namespace SeaBattle.View
                 _isCanmove = false;
                 _model.FirstPlayer.ResetField();
                 _shipDirection = ShipDirection.Horizontal;
+                _isUsePlayerMods = false;
             }
             catch (Exception ex)
             {
@@ -231,6 +234,7 @@ namespace SeaBattle.View
             try
             {
                 HideControls();
+                _mainWindow.Model.ComputerPlayer.GenerateMap(_isUsePlayerMods, _fileModeName);
                 _mainWindow.Model.ComputerPlayer.AutomaticShipPlacing();
                 Game gameWindow = new Game(_mainWindow);
                 this.Close();
@@ -242,5 +246,22 @@ namespace SeaBattle.View
             }
         }
 
+        private void AddingPlayerModifications_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            try
+            {
+                this.Visibility = Visibility.Collapsed;
+                PlayerModsWindow pm = new PlayerModsWindow(ref _isUsePlayerMods, ref _fileModeName);
+                pm.Closed += (sender2, e2) =>
+                {
+                    this.Visibility = Visibility.Visible;
+                };
+                pm.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
     }
 }
