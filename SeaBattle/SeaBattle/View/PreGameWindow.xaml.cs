@@ -251,12 +251,15 @@ namespace SeaBattle.View
             try
             {
                 this.Visibility = Visibility.Collapsed;
-                PlayerModsWindow pm = new PlayerModsWindow(ref _isUsePlayerMods, ref _fileModeName);
+                PlayerModsWindow pm = new PlayerModsWindow();
                 pm.Closed += (sender2, e2) =>
                 {
                     this.Visibility = Visibility.Visible;
                 };
                 pm.ShowDialog();
+
+                _isUsePlayerMods = pm.IsUsePlayerMods;
+                _fileModeName = pm.FullPath + pm.FileModeName;
             }
             catch (Exception ex)
             {

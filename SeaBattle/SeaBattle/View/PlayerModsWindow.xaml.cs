@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,19 +21,49 @@ namespace SeaBattle.View
     public partial class PlayerModsWindow : Window
     {
         private string _fileModeName;
+        private string _fullPath;
         private bool _isUsePlayerMods;
-        private string fileModeName;
-
-        public PlayerModsWindow(ref bool isUsePlayerMods)
-        {
-
-        }
-
-        public PlayerModsWindow(ref bool isUsePlayerMods, ref string fileModeName)
+        public PlayerModsWindow()
         {
             InitializeComponent();
-            _isUsePlayerMods = isUsePlayerMods;
-            _fileModeName = fileModeName;
+
+            FillListbox();
+        }
+
+        public string FileModeName
+        {
+            get { return _fileModeName;  }
+            set { _fileModeName = value; }
+        }
+
+        public string FullPath
+        {
+            get { return _fullPath;  }
+            set { _fullPath = value; }
+        }
+
+        public bool IsUsePlayerMods
+        {
+            get {  return _isUsePlayerMods;  }
+            set { _isUsePlayerMods = value;  }
+        }
+
+        private void FillListbox()
+        {
+            _fullPath = Directory.GetCurrentDirectory() + "\\PlayerPatches\\";
+            var dir = new System.IO.DirectoryInfo(_fullPath);
+            FileInfo[] files = dir.GetFiles("*.*");
+            listBox.Items.Clear();
+            listBox.ItemsSource = files;
+            listBox.DisplayMemberPath = "Name";
+        }
+
+        private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            _fileModeName = listBox.SelectedItem.ToString();
+
+            if (_fileModeName != null)
+                _isUsePlayerMods = false;
         }
     }
 }

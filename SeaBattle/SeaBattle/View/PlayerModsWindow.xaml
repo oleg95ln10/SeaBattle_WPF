@@ -5,8 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SeaBattle.View"
         mc:Ignorable="d"
-        Title="PlayerModsWindow" Height="300" Width="300">
-    <Grid>
-        
-    </Grid>
+        Title="PlayerMods" Height="204.8" Width="300">
+    <Canvas Background="#FF12AACE">
+        <Label Name="possibleModification" Content="Player"></Label>
+        <ListBox Name="listBox" Height="90" Width="294" Canvas.Top="59" SelectionChanged="ListBox_SelectionChanged"/>
+    </Canvas>
 </Window>

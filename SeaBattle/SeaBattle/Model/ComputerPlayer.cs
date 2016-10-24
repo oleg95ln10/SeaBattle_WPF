@@ -15,21 +15,18 @@ namespace SeaBattle.Model
     {
         private static Random _r;
         private List<int> _shotMap;// Карта обстрела корабля противника
-        private string _mapFilename;
-        private bool _isRandomMap;
         int _currentnumbOfCell;// Текущая ячейка из карты обстрела
-        public ComputerPlayer(string mapFilename, bool isRandomMap = true)
+        public ComputerPlayer()
             :base()
         {
             _shotMap = new List<int>();
             _r = new Random();
-            _isRandomMap = isRandomMap;
-            _mapFilename = mapFilename;
             _currentnumbOfCell = 0;
         }
 
         public void GenerateMap(bool isRandomMap, string mapFilename)
         {
+            if (_shotMap.Count == 0)
             if (!isRandomMap && mapFilename != null)
             {
                 using (FileStream stream = new FileStream(mapFilename, FileMode.Open))
@@ -106,6 +103,5 @@ namespace SeaBattle.Model
                 throw new Exception(e.Message);
             }
         }
-
     }
 }

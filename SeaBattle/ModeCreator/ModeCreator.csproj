@@ -34,7 +34,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="ModeDLL">
-      <HintPath>..\ModeDLL\bin\Release\ModeDLL.dll</HintPath>
+      <HintPath>..\ModeDLL\bin\Debug\ModeDLL.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
