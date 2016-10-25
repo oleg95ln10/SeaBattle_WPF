@@ -30,6 +30,7 @@ namespace SeaBattle.View
             FillListbox();
         }
 
+        #region Properties
         public string FileModeName
         {
             get { return _fileModeName;  }
@@ -47,6 +48,7 @@ namespace SeaBattle.View
             get {  return _isUsePlayerMods;  }
             set { _isUsePlayerMods = value;  }
         }
+        #endregion
 
         private void FillListbox()
         {

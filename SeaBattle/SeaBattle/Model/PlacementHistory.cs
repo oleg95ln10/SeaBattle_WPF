@@ -18,6 +18,7 @@ namespace SeaBattle.Model
         /// Выбран словарь, т.к. одна ячейка(ключ) не может иметь более 1 значения (есть корабль, нет корабля)
         /// </summary>
         private Dictionary<int, CellStatus> _history;
+
         public PlacementHistory()
         {
             _history = new Dictionary<int, CellStatus>();

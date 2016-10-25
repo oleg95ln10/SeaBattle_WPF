@@ -11,6 +11,7 @@ namespace SeaBattle.Model
     {
         private List<Cell> _cells;
         private int _index = -1;
+
         public Field()
         {
             _index = -1;
@@ -21,6 +22,8 @@ namespace SeaBattle.Model
                 _cells.Add(new Cell());
             }
         }
+
+        #region Properties
         public List<Cell> Cells
         {
             get { return _cells; }
@@ -31,10 +34,13 @@ namespace SeaBattle.Model
         {
             get  { return _cells[_index]; }
         }
+        #endregion
+
         public IEnumerator GetEnumerator()
         {
             return this;
         }
+
         public bool MoveNext()
         {
             if (_index == _cells.Count - 1)
@@ -46,14 +52,17 @@ namespace SeaBattle.Model
             _index++;
             return true;
         }
+
         public void Reset()
         {
             _index = -1;
         }
+
         public static int DecartToLine(int x, int y)
         {
             return x + (y * 10);
         }
+
         public static void LineToDecart(int coordinate, out int x, out int y)
         {
             y = coordinate % 10;

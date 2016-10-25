@@ -8,6 +8,11 @@ using System.Threading.Tasks;
 
 namespace SeaBattle.Model
 {
+    /// <summary>
+    /// Репозиторий для БД
+    /// Клиент не знает про бд
+    /// Если сменим бд нужно переписать только этот класс
+    /// </summary>
     class PlayerRepository : IPlayerRepository
     {
         public void AddPlayer(DbPlayer player)

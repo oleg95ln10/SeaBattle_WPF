@@ -83,6 +83,7 @@ namespace SeaBattle.Model
                 throw new Exception(e.Message);
             }
         }
+
         /// <summary>
         /// Извлечь следущую ячейку для обстрела
         /// </summary>

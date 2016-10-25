@@ -33,6 +33,7 @@ namespace SeaBattle
             get { return _model;  }
             set { _model = value; }
         }
+
         private void StartGameButton_Click(object sender, RoutedEventArgs e)
         {
             try
