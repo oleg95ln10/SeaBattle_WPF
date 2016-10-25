@@ -43,8 +43,9 @@ namespace SeaBattle.View
             {
                 _shipArray = new int[AbstractPlayer.SHIP_ARRAY.Length];
                 _shipArray = (int[])AbstractPlayer.SHIP_ARRAY.Clone();
-                _currentShip = _shipArray.Max();
-                _shipArray.SetValue(-100, Array.IndexOf(_shipArray, _shipArray.Max()));
+
+                GetShip();
+
                 ship.Height = Cell.CellSize - 2;
                 ship.Width = (Cell.CellSize - 2) * _currentShip;
                 _zeroShipPosition = new Point(Canvas.GetLeft(ship), Canvas.GetTop(ship));

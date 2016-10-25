@@ -19,6 +19,7 @@ namespace SeaBattle.Model
         private static Random _r;// Для автоматической расстановки кораблей
         private bool _isShotOnShip;// Попали ли по кораблю
         private int _move; // Количество ходов (чем меньше, тем больше счет)
+        private int[] _currentShipArray;
         public static readonly int[] SHIP_ARRAY = { 1, 1, 1, 1, 2, 2, 2, 3, 3, 4 }; // Количество кораблей
 
         public AbstractPlayer()
@@ -28,6 +29,8 @@ namespace SeaBattle.Model
             _r = new Random();
             _shipCount = 20;
             _move = 0;
+            _currentShipArray = new int[SHIP_ARRAY.Length];
+            _currentShipArray = (int[])SHIP_ARRAY.Clone();
         }
 
         #region Properties
@@ -62,6 +65,12 @@ namespace SeaBattle.Model
             get { return _isShotOnShip; }
             set { _isShotOnShip = value; }
         }
+
+        public int[] CurrentShipArray
+        {
+            get  { return _currentShipArray;   }
+            set  { _currentShipArray = value;  }
+        }
         #endregion
 
         /// <summary>
@@ -83,25 +92,28 @@ namespace SeaBattle.Model
         {
             try
             {
-                var tempShipArray = (int[])SHIP_ARRAY.Clone();
-                Array.Reverse(tempShipArray);
+
+                Array.Reverse(_currentShipArray);
                 ShipDirection shipDirection;
                 int startX = 0;
                 int startY = 0;
 
-                foreach (var v in tempShipArray)
+                foreach (var v in _currentShipArray)
                 {
-                    GetRandomShipDirection(out shipDirection);
-                    GetRandomCoordinates(ref startX, ref startY);
-                    while (!IsCanBePlaced(startX, startY, v, shipDirection))
+                    if (v > 0)
                     {
-                        GetRandomCoordinates(ref startX, ref startY);
                         GetRandomShipDirection(out shipDirection);
+                        GetRandomCoordinates(ref startX, ref startY);
+                        while (!IsCanBePlaced(startX, startY, v, shipDirection))
+                        {
+                            GetRandomCoordinates(ref startX, ref startY);
+                            GetRandomShipDirection(out shipDirection);
+                        }
+
+                        PlaceShips(startX, startY, v, shipDirection);
+
+                        PlacementHist.History.Clear();
                     }
-
-                    PlaceShips(startX, startY, v, shipDirection);
-
-                    PlacementHist.History.Clear();
                 }
             }
             catch (Exception e)
@@ -132,6 +144,7 @@ namespace SeaBattle.Model
                             PlaceVerticalShip(x, y, shipLenght);
                             break;
                     }
+                    _currentShipArray.SetValue(-100, Array.IndexOf(_currentShipArray, _currentShipArray.Max()));
                 }
             }
             catch (Exception e)

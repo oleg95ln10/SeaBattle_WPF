@@ -19,6 +19,7 @@ namespace ModeDLL
             _fileToSave = fileToSave;
             _shotMap = new List<int>();
         }
+
         public virtual void GetShotMap()
         {
             try
@@ -32,6 +33,7 @@ namespace ModeDLL
                 throw new Exception(e.Message);
             }
         }
+
         /// <summary>
         /// Перемешать карту
         /// </summary>
@@ -55,6 +57,10 @@ namespace ModeDLL
                 throw new Exception(e.Message);
             }
         }
+
+        /// <summary>
+        /// Записать поле в файл
+        /// </summary>
         public void WriteFieldToFile()
         {
             if (_shotMap.Count == 100)
