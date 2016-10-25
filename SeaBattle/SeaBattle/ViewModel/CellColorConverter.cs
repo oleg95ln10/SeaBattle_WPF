@@ -29,13 +29,13 @@ namespace SeaBattle.ViewModel
                         b.Background = Brushes.Yellow;
                         break;
                     case CellStatus.ComputerShip:
-                        b.Background = Brushes.HotPink;
+                        b.Background = Brushes.SaddleBrown;
                         break;
                     case CellStatus.PlayerShot:
                         b.Background = Brushes.DarkBlue;
                         break;
                     case CellStatus.ComputerShot:
-                        b.Background = Brushes.Gray;
+                        b.Background = Brushes.Lime;
                         break;
                 }
             }
@@ -51,7 +51,7 @@ namespace SeaBattle.ViewModel
                         b.Background = Brushes.Red;
                         break;
                     case CellStatus.Busy:
-                        b.Background = Brushes.Yellow;
+                        b.Background = Brushes.Goldenrod;
                         break;
                 }
 
