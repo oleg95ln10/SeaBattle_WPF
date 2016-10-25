@@ -27,19 +27,22 @@ namespace SeaBattle.View
         private MainWindow _mainWindow;// Главное окно для возможного возврата
         private bool _isUsePlayerMods;// Использовать ли пользовательские моды
         private string _fileModeName;// Имя файла с пользовательским модом
+        private bool _isStartGame;
         public PreGameWindow(MainWindow mainWindow)
         {
             InitializeComponent();
             _mainWindow = mainWindow;
-            this._model = mainWindow.Model;
+            _model = mainWindow.Model;
+            this.Closed += PreGameWindow_Closed;
             Init();
         }
+
         private void Init()
         {
             try
             {
-                _shipArray = new int[AbstractPlayer.SHIPARRAY.Length];
-                _shipArray = (int[])AbstractPlayer.SHIPARRAY.Clone();
+                _shipArray = new int[AbstractPlayer.SHIP_ARRAY.Length];
+                _shipArray = (int[])AbstractPlayer.SHIP_ARRAY.Clone();
                 _currentShip = _shipArray.Max();
                 _shipArray.SetValue(-100, Array.IndexOf(_shipArray, _shipArray.Max()));
                 ship.Height = Cell.CellSize - 2;
@@ -50,12 +53,20 @@ namespace SeaBattle.View
                 _model.FirstPlayer.ResetField();
                 _shipDirection = ShipDirection.Horizontal;
                 _isUsePlayerMods = false;
+                _isStartGame = false;
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
 
+        }
+
+        private void PreGameWindow_Closed(object sender, EventArgs e)
+        {
+            if (!_isStartGame)
+            _mainWindow.ShowDialog();
+            this.Close();
         }
 
         private void FieldController_PreviewMouseLeftButtonDown(object sender)
@@ -234,6 +245,7 @@ namespace SeaBattle.View
             try
             {
                 HideControls();
+                _isStartGame = true;
                 _mainWindow.Model.ComputerPlayer.GenerateMap(_isUsePlayerMods, _fileModeName);
                 _mainWindow.Model.ComputerPlayer.AutomaticShipPlacing();
                 Game gameWindow = new Game(_mainWindow);

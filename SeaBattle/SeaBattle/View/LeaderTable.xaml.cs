@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SeaBattle.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +20,14 @@ namespace SeaBattle.View
     /// </summary>
     public partial class LeaderTable : Window
     {
+        PlayerRepository _pr;
         public LeaderTable()
         {
             InitializeComponent();
+
+            _pr = new PlayerRepository();
+
+            playersGrid.ItemsSource = _pr.GetPlayers();
         }
     }
 }

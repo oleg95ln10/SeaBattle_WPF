@@ -19,7 +19,8 @@ namespace SeaBattle.Model
         private static Random _r;// Для автоматической расстановки кораблей
         private bool _isShotOnShip;// Попали ли по кораблю
         private int _move; // Количество ходов (чем меньше, тем больше счет)
-        public static readonly int[] SHIPARRAY = { 1, 1, 1, 1, 2, 2, 2, 3, 3, 4 }; // Количество кораблей
+        public static readonly int[] SHIP_ARRAY = { 1, 1, 1, 1, 2, 2, 2, 3, 3, 4 }; // Количество кораблей
+
         public AbstractPlayer()
         {
             _field = new Field();
@@ -82,7 +83,7 @@ namespace SeaBattle.Model
         {
             try
             {
-                var tempShipArray = (int[])SHIPARRAY.Clone();
+                var tempShipArray = (int[])SHIP_ARRAY.Clone();
                 Array.Reverse(tempShipArray);
                 ShipDirection shipDirection;
                 int startX = 0;
@@ -92,18 +93,14 @@ namespace SeaBattle.Model
                 {
                     GetRandomShipDirection(out shipDirection);
                     GetRandomCoordinates(ref startX, ref startY);
-
-                    if (IsCanBePlaced(startX, startY, v, shipDirection) && Field.Cells[Field.DecartToLine(startX, startY)].CellValue == CellStatus.Empty)
-                        PlaceShips(startX, startY, v, shipDirection);
-                    else
+                    while (!IsCanBePlaced(startX, startY, v, shipDirection))
                     {
-                        while (!IsCanBePlaced(startX, startY, v, shipDirection))
-                        {
-                            GetRandomCoordinates(ref startX, ref startY);
-                            GetRandomShipDirection(out shipDirection);
-                        }
-                        PlaceShips(startX, startY, v, shipDirection);
+                        GetRandomCoordinates(ref startX, ref startY);
+                        GetRandomShipDirection(out shipDirection);
                     }
+
+                    PlaceShips(startX, startY, v, shipDirection);
+
                     PlacementHist.History.Clear();
                 }
             }

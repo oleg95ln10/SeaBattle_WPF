@@ -15,7 +15,6 @@ namespace SeaBattle.Model
         Busy,
         Empty,
         PlayerShot,
-        PlayerShip,
         ComputerShot,
         ComputerShip
     }

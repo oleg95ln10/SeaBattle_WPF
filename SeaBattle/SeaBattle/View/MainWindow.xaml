@@ -20,7 +20,7 @@
     <Grid Background="#FF12AACE">
         <Label FontSize="50" HorizontalAlignment="Center" Foreground="Pink">Sea battle</Label>
         <Button Margin="145,92,144.4,161.4" Content="New game" FontSize="35" Click="StartGameButton_Click" Style="{StaticResource EmphasizedBigFontButtonStyle}" ></Button>
-        <Button Margin="145,182,144.4,71.4" Content="View leaders" FontSize="35" Click="Button_Click_1" Style="{StaticResource EmphasizedBigFontButtonStyle}" />
+        <Button Margin="145,182,144.4,71.4" Content="View leaders" FontSize="35" Click="LeaderButton_Click" Style="{StaticResource EmphasizedBigFontButtonStyle}" />
 
     </Grid>
 </Window>

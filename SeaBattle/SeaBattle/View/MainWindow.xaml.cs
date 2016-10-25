@@ -27,8 +27,6 @@ namespace SeaBattle
         public MainWindow()
         {
             InitializeComponent();
-
-            _model = new MainViewModel();
         }
         public MainViewModel Model
         {
@@ -39,8 +37,9 @@ namespace SeaBattle
         {
             try
             {
+                _model = new MainViewModel();
+                this.Visibility = Visibility.Hidden;
                 PreGameWindow pg = new PreGameWindow(this);
-                this.Close();
                 pg.ShowDialog();
             }
             catch (Exception ex)
@@ -49,17 +48,17 @@ namespace SeaBattle
             }
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void LeaderButton_Click(object sender, RoutedEventArgs e)
         {
             try
             {
                 this.Visibility = Visibility.Collapsed;
-                LeaderTable lt = new LeaderTable();
-                lt.Closed += (sender2, e2) =>
+                LeaderTable table = new LeaderTable();
+                table.Closed += (sender2, e2) =>
                 {
                     this.Visibility = Visibility.Visible;
                 };
-                lt.ShowDialog();
+                table.ShowDialog();
             }
             catch(Exception ex)
             {

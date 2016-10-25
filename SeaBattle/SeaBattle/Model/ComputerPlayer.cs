@@ -16,6 +16,7 @@ namespace SeaBattle.Model
         private static Random _r;
         private List<int> _shotMap;// Карта обстрела корабля противника
         int _currentnumbOfCell;// Текущая ячейка из карты обстрела
+
         public ComputerPlayer()
             :base()
         {

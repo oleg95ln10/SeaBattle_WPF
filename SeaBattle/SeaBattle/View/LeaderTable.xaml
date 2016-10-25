@@ -5,12 +5,25 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SeaBattle.View"
         mc:Ignorable="d"
-        Title="LeaderTable" Height="300" Width="300">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="95*"/>
-            <RowDefinition Height="41*"/>
-        </Grid.RowDefinitions>
-
+        Title="LeaderTable" Height="300" Width="300" ResizeMode="NoResize">
+    <Window.Resources>
+            <Style TargetType="Button">
+                <Setter Property="Margin" Value="20 8 20 8" />
+                <Setter Property="Width" Value="100" />
+                <Setter Property="Height" Value="30" />
+            </Style>
+        </Window.Resources>
+    <Grid Background="#FF12AACE">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+        <DataGrid AutoGenerateColumns="False" x:Name="playersGrid">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Id}" Header="ID" Width="100"/>
+                <DataGridTextColumn Binding="{Binding Name}" Header="Player" Width="110"/>
+                <DataGridTextColumn Binding="{Binding Score}" Header="Score" Width="70"/>
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </Window>

@@ -14,10 +14,12 @@ namespace SeaBattle.Model
     {
         public static readonly int CellSize = 25;
         private CellStatus _cellValue;
+
         public Cell()
         {
             _cellValue = CellStatus.Empty;
         }
+
         public CellStatus CellValue
         {
             get {return _cellValue;}

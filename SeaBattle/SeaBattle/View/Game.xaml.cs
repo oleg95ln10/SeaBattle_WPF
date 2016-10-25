@@ -26,13 +26,14 @@ namespace SeaBattle.View
         private bool _isGameOver;// Флаг окончания игры
         private bool _isComputerCanShot;// Флаг возможности стрельбы компьютера
         private bool _isPlayerCanShot;// Флаг возможности стрельбы игрока
+        private bool _isAddToDB;
         // Для уменьшения записи
         private Player _player;
         private ComputerPlayer _computerPlayer;
         public Game(MainWindow mainWindow)
         {
             InitializeComponent();
-            this._mainWindow = mainWindow;
+            _mainWindow = mainWindow;
             _isGameOver = false;
             _isComputerCanShot = false;
             _isPlayerCanShot = true;
@@ -40,6 +41,15 @@ namespace SeaBattle.View
             _computerPlayer = _mainWindow.Model.ComputerPlayer;
             CellColorConverter.SetColor(playerFieldController.canvas.Children, _mainWindow.Model.FirstPlayer.Field.Cells);
             computerFieldController.canvas.PreviewMouseLeftButtonDown += Canvas_PreviewMouseLeftButtonDown;
+            _isAddToDB = false;
+            this.Closed += Game_Closed;
+        }
+
+        private void Game_Closed(object sender, EventArgs e)
+        {
+            this.Close();
+            if (!_isAddToDB)
+            _mainWindow.ShowDialog();
         }
 
         private void Canvas_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -97,6 +107,7 @@ namespace SeaBattle.View
             }
 
         }
+
         /// <summary>
         /// Метод для определения победителя
         /// </summary>
@@ -106,6 +117,18 @@ namespace SeaBattle.View
                 MessageBox.Show("ComputerPlayer player is WINS!");
             if (_computerPlayer.ShipCount == 0)
                 MessageBox.Show("You WON");
+        }
+
+
+        private void AddToPalyerToDatabase_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            AddPlayerToDBWindow addPlayer = new AddPlayerToDBWindow(_mainWindow,_player);
+
+            _isAddToDB = true;
+
+            this.Close();
+
+            addPlayer.ShowDialog();
         }
     }
 }

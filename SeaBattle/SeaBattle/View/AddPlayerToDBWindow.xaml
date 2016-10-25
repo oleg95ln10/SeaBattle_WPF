@@ -1,0 +1,14 @@
+﻿<Window x:Class="SeaBattle.View.AddPlayerToDBWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SeaBattle.View"
+        mc:Ignorable="d"
+        Title="AddPlayerToDBWindow" Height="300" Width="300" ResizeMode="NoResize">
+    <Canvas Background="#FF12AACE">
+        <Label Content="Please input your name:" FontSize="25" Canvas.Left="10" Canvas.Top="72"></Label>
+        <TextBox Name="playerNameTextbox" FontSize="25" Width="273" Canvas.Left="10" Canvas.Top="115" Height="36"></TextBox>
+        <Button Content="Add to DB" Canvas.Left="74" Canvas.Top="179" Height="40" Width="137" PreviewMouseLeftButtonDown="Button_PreviewMouseLeftButtonDown"></Button>
+    </Canvas>
+</Window>
