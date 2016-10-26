@@ -28,6 +28,20 @@ namespace SeaBattle.View
             InitializeComponent();
             _mainWindow = mainWindow;
             _player = player;
+            this.Closed += AddPlayerToDBWindow_Closed;
+        }
+
+        private void AddPlayerToDBWindow_Closed(object sender, EventArgs e)
+        {
+            try
+            {
+                _mainWindow.ShowDialog();
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void Button_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)

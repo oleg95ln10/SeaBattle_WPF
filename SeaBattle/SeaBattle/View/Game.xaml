@@ -16,7 +16,6 @@
         <Label Name="computerLabel" FontSize="25" Content="COMPUTER FIELD" Canvas.Left="443" Canvas.Top="10"></Label>
         <Label Name="computerScore" FontSize="25" Content="Score:" Canvas.Left="419" Canvas.Top="301"></Label>
         <Label Name="computerScoreValue" FontSize="25" Canvas.Left="501" Canvas.Top="298" Height="49" Width="155"></Label>
-
-        <Button Name="AddToPalyerToDatabase" Content="Add result to database" Canvas.Left="10" Canvas.Top="337" Height="31" Width="710" PreviewMouseLeftButtonDown="AddToPalyerToDatabase_PreviewMouseLeftButtonDown"></Button>
+        <Button Name="addToPalyerToDatabase" Content="Add result to database" Canvas.Left="10" Canvas.Top="337" Height="31" Width="710" PreviewMouseLeftButtonDown="AddToPalyerToDatabase_PreviewMouseLeftButtonDown"></Button>
     </Canvas>
 </Window>

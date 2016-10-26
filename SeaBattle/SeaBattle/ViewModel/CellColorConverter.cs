@@ -40,6 +40,8 @@ namespace SeaBattle.ViewModel
                 }
             }
         }
+
+
         public static void SetColor(UIElementCollection collection, List<Cell> history)
         {
             for (int i = 0; i < history.Count; ++i)
@@ -54,7 +56,6 @@ namespace SeaBattle.ViewModel
                         b.Background = Brushes.Goldenrod;
                         break;
                 }
-
             }
         }
     }

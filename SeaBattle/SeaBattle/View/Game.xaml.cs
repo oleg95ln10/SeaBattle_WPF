@@ -42,6 +42,7 @@ namespace SeaBattle.View
             CellColorConverter.SetColor(playerFieldController.canvas.Children, _mainWindow.Model.FirstPlayer.Field.Cells);
             computerFieldController.canvas.PreviewMouseLeftButtonDown += Canvas_PreviewMouseLeftButtonDown;
             _isAddToDB = false;
+            addToPalyerToDatabase.Visibility = Visibility.Hidden;
             this.Closed += Game_Closed;
         }
 
@@ -114,9 +115,20 @@ namespace SeaBattle.View
         private void TryFindWinner()
         {
             if (_player.ShipCount == 0)
+            {
                 MessageBox.Show("ComputerPlayer player is WINS!");
+                _isGameOver = true;
+
+            }
+
             if (_computerPlayer.ShipCount == 0)
+            {
                 MessageBox.Show("You WON");
+                _isGameOver = true;
+            }
+
+            if (_isGameOver)
+                addToPalyerToDatabase.Visibility = Visibility.Visible;
         }
 
 
