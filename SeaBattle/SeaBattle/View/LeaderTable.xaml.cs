@@ -20,12 +20,11 @@ namespace SeaBattle.View
     /// </summary>
     public partial class LeaderTable : Window
     {
-        PlayerRepository _pr;
         public LeaderTable()
         {
             InitializeComponent();
 
-            _pr = new PlayerRepository();
+            var _pr = AutofacConfig.Repository;
 
             playersGrid.ItemsSource = _pr.GetPlayers();
         }

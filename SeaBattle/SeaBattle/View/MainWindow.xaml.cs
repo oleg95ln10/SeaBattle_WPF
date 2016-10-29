@@ -27,6 +27,7 @@ namespace SeaBattle
         public MainWindow()
         {
             InitializeComponent();
+            AutofacConfig.ConfigureContainer();
         }
         public MainViewModel Model
         {

@@ -13,25 +13,31 @@ namespace SeaBattle.Model
     /// Клиент не знает про бд
     /// Если сменим бд нужно переписать только этот класс
     /// </summary>
-    class PlayerRepository : IPlayerRepository
+    class PlayerRepository : IPlayerRepository, IDisposable
     {
+        PlayerContext _dbContext;
+
+        public PlayerRepository(PlayerContext context)
+        { 
+            _dbContext = context;
+        }
+
         public void AddPlayer(DbPlayer player)
         {
-            using (var dbContext = new PlayerContext())
-            {
-                dbContext.Players.Add(player);
-                dbContext.SaveChanges();
-            }
+            _dbContext.Players.Add(player);
+            _dbContext.SaveChanges();
         }
 
         public BindingList<DbPlayer> GetPlayers()
         {
-            using (var dbContext = new PlayerContext())
-            {
-                dbContext.Players.Load();
+            _dbContext.Players.Load();
+            return _dbContext.Players.Local.ToBindingList();
+        }
 
-                return dbContext.Players.Local.ToBindingList();
-            }
+
+        public void Dispose()
+        {
+            _dbContext.Dispose();
         }
     }
 }

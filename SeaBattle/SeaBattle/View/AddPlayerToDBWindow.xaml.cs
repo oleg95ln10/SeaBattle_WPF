@@ -1,9 +1,11 @@
-﻿using SeaBattle.Model;
+﻿using Autofac;
+using SeaBattle.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Mvc;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -46,14 +48,16 @@ namespace SeaBattle.View
 
         private void Button_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
+
             try
             {
                 if (playerNameTextbox.Text != null)
                 {
+
                     DbPlayer pl = new DbPlayer();
                     pl.Name = playerNameTextbox.Text;
                     pl.Score = _player.Score;
-                    PlayerRepository pr = new PlayerRepository();
+                    IPlayerRepository pr = AutofacConfig.Repository;
                     pr.AddPlayer(pl);
                 }
             }

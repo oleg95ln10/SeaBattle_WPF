@@ -41,8 +41,8 @@ namespace SeaBattle.View
             _computerPlayer = _mainWindow.Model.ComputerPlayer;
             CellColorConverter.SetColor(playerFieldController.canvas.Children, _mainWindow.Model.FirstPlayer.Field.Cells);
             computerFieldController.canvas.PreviewMouseLeftButtonDown += Canvas_PreviewMouseLeftButtonDown;
-            _isAddToDB = false;
-            addToPalyerToDatabase.Visibility = Visibility.Hidden;
+            _isAddToDB = !false;
+            //addToPalyerToDatabase.Visibility = Visibility.Hidden;
             this.Closed += Game_Closed;
         }
 

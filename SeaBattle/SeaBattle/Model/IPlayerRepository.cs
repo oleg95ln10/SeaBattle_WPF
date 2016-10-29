@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace SeaBattle.Model
 {
-    interface IPlayerRepository
+    public interface IPlayerRepository
     {
         void AddPlayer(DbPlayer player);
         BindingList<DbPlayer> GetPlayers();

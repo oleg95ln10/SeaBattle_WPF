@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SeaBattle.Model
 {
-    class DbPlayer
+    public class DbPlayer
     {
         public int Id { get; set; }
         public string Name { get; set; }
