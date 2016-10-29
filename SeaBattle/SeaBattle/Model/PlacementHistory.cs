@@ -7,15 +7,15 @@ using System.Threading.Tasks;
 namespace SeaBattle.Model
 {
     /// <summary>
-    /// Класс для реализации истории размещения кораблей,
-    /// чтобы в случае изменения (постановки корабля)
-    /// изменить цвет конкретных элементов,
-    /// не перерисовывая все поле
+    /// The class for the implementation
+    /// of the history of the ships placin',
+    /// if we place ship we change the color
+    /// of specific elements without redrawing the entire field
     /// </summary>
     public class PlacementHistory
     {
         /// <summary>
-        /// Выбран словарь, т.к. одна ячейка(ключ) не может иметь более 1 значения (есть корабль, нет корабля)
+        /// Dictionary selected because one cell (the key) can't have more than one value (a ship, there is a ship)
         /// </summary>
         private Dictionary<int, CellStatus> _history;
 

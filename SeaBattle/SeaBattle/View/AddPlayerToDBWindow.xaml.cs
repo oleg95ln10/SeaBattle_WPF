@@ -42,7 +42,7 @@ namespace SeaBattle.View
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                QuietLogger.LogQ(ex);
             }
         }
 
@@ -56,14 +56,12 @@ namespace SeaBattle.View
 
                     DbPlayer pl = new DbPlayer();
                     pl.Name = playerNameTextbox.Text;
-                    pl.Score = _player.Score;
-                    IPlayerRepository pr = AutofacConfig.Repository;
-                    pr.AddPlayer(pl);
+                    AutofacConfig.Repository.AddPlayer(pl);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                QuietLogger.LogQ(ex);
             }
             finally
             {

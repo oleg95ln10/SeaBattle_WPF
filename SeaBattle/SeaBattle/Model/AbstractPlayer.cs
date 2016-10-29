@@ -7,20 +7,20 @@ using System.Threading.Tasks;
 namespace SeaBattle.Model
 {
     /// <summary>
-    /// Класс, описывающий игрока
+    /// Class implements a player
     /// </summary>
     public abstract class AbstractPlayer
     {
-        private String _name;// Имя игрока
-        private int _score;// Счет игрока
-        private Field _field;// Поле игрока
-        private PlacementHistory _placementHist;// Используется для удобства закрашивания ячеек
-        private int _shipCount;// Количество клеток, занимаемых кораблями (сумма чисел в ShipArray)
-        private static Random _r;// Для автоматической расстановки кораблей
-        private bool _isShotOnShip;// Попали ли по кораблю
-        private int _move; // Количество ходов (чем меньше, тем больше счет)
+        private String _name;// Player name
+        private int _score;// Player score
+        private Field _field;// Player's field
+        private PlacementHistory _placementHist;// Use for cell clolorization
+        private int _shipCount;// Numb of cell with ships (sum of elements from shipArray)
+        private static Random _r;// For auto ship placing
+        private bool _isShotOnShip;// Is hit on ship
+        private int _move; // Player moves
         private int[] _currentShipArray;
-        public static readonly int[] SHIP_ARRAY = { 1, 1, 1, 1, 2, 2, 2, 3, 3, 4 }; // Количество кораблей
+        public static readonly int[] SHIP_ARRAY = { 1, 1, 1, 1, 2, 2, 2, 3, 3, 4 }; // Numb of ships
 
         public AbstractPlayer()
         {
@@ -74,7 +74,7 @@ namespace SeaBattle.Model
         #endregion
 
         /// <summary>
-        /// Обнулить поле
+        /// Make field clear
         /// </summary>
         public void ResetField()
         {
@@ -85,8 +85,7 @@ namespace SeaBattle.Model
         }
 
         /// <summary>
-        /// Авторасстановка кораблей
-        /// Проходим по массиву и в соответствии с правилами на поле расставляем корабли
+        /// Autoplacing of ships
         /// </summary>
         public void AutomaticShipPlacing()
         {
@@ -123,7 +122,7 @@ namespace SeaBattle.Model
         }
 
         /// <summary>
-        /// Метод для расстановки кораблей
+        /// Mathod for ship placing
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
@@ -154,7 +153,7 @@ namespace SeaBattle.Model
         }
 
         /// <summary>
-        /// Метод для проверки возмодности постановки корабля
+        /// Mathod for verify the possibility ship installation
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
@@ -190,7 +189,7 @@ namespace SeaBattle.Model
         }
 
         /// <summary>
-        /// Можем ли атаковать оппонента
+        /// Is can we attak the opponent
         /// </summary>
         /// <param name="attackingPlayer"></param>
         /// <param name="indexOfFieldCell"></param>
@@ -202,7 +201,7 @@ namespace SeaBattle.Model
             try
             {
                 if (indexOfFieldCell >= 0 && indexOfFieldCell < Field.Cells.Count)
-                    // Если мы раньше не стреляли по этому полю
+                    // If we had not shot on the field
                     if ((attackingPlayer.Field.Cells[indexOfFieldCell].CellValue != playerShotType 
                         || attackingPlayer.Field.Cells[indexOfFieldCell].CellValue != opponentFindedShip)
                         && !PlacementHist.History.ContainsKey(indexOfFieldCell))
@@ -216,8 +215,8 @@ namespace SeaBattle.Model
         }
         
         /// <summary>
-        /// Атаковать игрока
-        /// Если попали на корабль противника прибавляем счет
+        /// Attack opponent
+        /// If we hit the ship. add score
         /// </summary>
         /// <param name="attackingPlayer"></param>
         /// <param name="indexOfFieldCell"></param>
@@ -251,9 +250,9 @@ namespace SeaBattle.Model
                 throw new Exception(e.Message);
             }
         }
-        
+
         /// <summary>
-        /// Изменяем счет в зависимости от количества ходов
+        /// Score change depending on the number of moves
         /// </summary>
         /// <param name="attackingPlayer"></param>
         private void ChangeScore(AbstractPlayer attackingPlayer)
@@ -274,10 +273,9 @@ namespace SeaBattle.Model
                 throw new Exception(e.Message);
             }
         }
-        
+
         /// <summary>
-        /// Размещаем на поле корабль по горизонтали и записываем клетки для закрашивания
-        /// на поле
+        /// Place on the ship horizontally and write cells to paint on the field
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
@@ -288,32 +286,32 @@ namespace SeaBattle.Model
             {
                 if ((x + shipLenght <= 10 && y <= 9) && (x + shipLenght >= 0 && y >= 0))
                 {
-                    // Левая верхняя ячейка
+                    // Upper-left cell
                     if (y - 1 >= 0 && x - 1 >= 0)
                     {
                         AddValuesToDictAndField(((x - 1) + (y - 1) * 10));
                     }
-                    // Правая верхняя ячейка
+                    // Uper right cell
                     if (x + shipLenght <= 9 && y - 1 >= 0)
                     {
                         AddValuesToDictAndField(((x + shipLenght) + (y - 1) * 10));
                     }
-                    // Средняя левая ячейка
+                    // Middle left cell
                     if (x - 1 >= 0 && x - 1 <= 9)
                     {
                         AddValuesToDictAndField(((x - 1) + y * 10));
                     }
-                    // Средняя правая ячейка
+                    // Middle right cell
                     if (x + shipLenght <= 9)
                     {
                         AddValuesToDictAndField((x + shipLenght) + y * 10);
                     }
-                    // Левая нижняя ячейка
+                    // Left bottom cell
                     if (y + 1 <= 9 && x - 1 >= 0)
                     {
                         AddValuesToDictAndField((x - 1) + (y + 1) * 10);
                     }
-                    // Правая нижняя ячейка
+                    // Right bottom cell
                     if (x + shipLenght <= 9 && y + 1 <= 9)
                     {
                         AddValuesToDictAndField((x + shipLenght) + (y + 1) * 10);
@@ -340,11 +338,10 @@ namespace SeaBattle.Model
                 throw new Exception(e.Message);
             }
         }
-       
+
         /// <summary>
-        /// Размещаем на поле корабль по вертикали и записываем клетки для закрашивания
-        /// на поле
-        /// </summary>
+        /// Place on the ship vertically and write cells to paint fields
+        /// <summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
         /// <param name="shipLenght"></param>
@@ -354,32 +351,32 @@ namespace SeaBattle.Model
             {
                 if ((x <= 10 && y + shipLenght <= 10) && (y + shipLenght >= 0 && x >= 0))
                 {
-                    // Левая верхняя ячейка
+                    // Upper left cell
                     if (y - 1 >= 0 && x - 1 >= 0)
                     {
                         AddValuesToDictAndField((x - 1) + (y - 1) * 10);
                     }
-                    // Правая верхняя ячейка
+                    // Upper right cell
                     if (x + 1 <= 9 && y - 1 >= 0)
                     {
                         AddValuesToDictAndField((x + 1) + (y - 1) * 10);
                     }
-                    // Средняя левая ячейка
+                    // Middle left cell
                     if (y - 1 >= 0)
                     {
                         AddValuesToDictAndField(x + (y - 1) * 10);
                     }
-                    // Средняя правая ячейка
+                    // Middle right cell
                     if (y + shipLenght <= 9 && x - 1 >= 0)
                     {
                         AddValuesToDictAndField((x - 1) + (y + shipLenght) * 10);
                     }
-                    // Левая нижняя ячейка
+                    // Bottom left cell
                     if (y + shipLenght <= 9)
                     {
                         AddValuesToDictAndField(x + (y + shipLenght) * 10);
                     }
-                    // Правая нижняя ячейка
+                    // Bottom right cell
                     if (y + shipLenght <= 9 && x + 1 <= 9)
                     {
                         AddValuesToDictAndField((x + 1) + (y + shipLenght) * 10);
@@ -407,7 +404,7 @@ namespace SeaBattle.Model
         }
 
         /// <summary>
-        /// Получить случайное направление для постановки корабля
+        /// Get a random direction for setting the ship
         /// </summary>
         /// <param name="direction"></param>
         private void GetRandomShipDirection(out ShipDirection direction)
@@ -428,7 +425,7 @@ namespace SeaBattle.Model
         }
 
         /// <summary>
-        /// Получить случайные координаты для постановки корабля
+        /// Get a random coordinates for setting the ship
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
@@ -451,7 +448,7 @@ namespace SeaBattle.Model
         }
 
         /// <summary>
-        /// Проверка на корректность координат
+        /// Check on the correctness of the coordinates
         /// </summary>
         /// <param name="coordinate"></param>
         /// <returns></returns>
@@ -470,7 +467,7 @@ namespace SeaBattle.Model
         }
 
         /// <summary>
-        /// Метод для связывания значения координат на поле с их значениями
+        /// Method for binding on the coordinate values with the values
         /// </summary>
         /// <param name="key"></param>
         /// <param name="status"></param>

@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 namespace SeaBattle.Model
 {
     /// <summary>
-    /// Репозиторий для БД
-    /// Клиент не знает про бд
-    /// Если сменим бд нужно переписать только этот класс
+    /// Reposit for DB
+    /// Client doesn't khows about DB
+    /// If we will choose DB, should be rewrite
     /// </summary>
     class PlayerRepository : IPlayerRepository, IDisposable
     {

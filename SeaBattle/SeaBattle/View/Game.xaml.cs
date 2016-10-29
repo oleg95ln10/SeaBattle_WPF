@@ -18,16 +18,16 @@ namespace SeaBattle.View
 {
     /// <summary>
     /// Interaction logic for Game.xaml
-    /// Окно для игрового проуесса
+    /// Gape process window
     /// </summary>
     public partial class Game : Window
     {
-        private MainWindow _mainWindow;// Главное окно для возможного возврата
-        private bool _isGameOver;// Флаг окончания игры
-        private bool _isComputerCanShot;// Флаг возможности стрельбы компьютера
-        private bool _isPlayerCanShot;// Флаг возможности стрельбы игрока
+        private MainWindow _mainWindow;// Main window
+        private bool _isGameOver;// Game over flag
+        private bool _isComputerCanShot;// Flag of computer shot opportunity
+        private bool _isPlayerCanShot;// Flag for player shot opportunity
         private bool _isAddToDB;
-        // Для уменьшения записи
+        // For comfort
         private Player _player;
         private ComputerPlayer _computerPlayer;
         public Game(MainWindow mainWindow)
@@ -57,11 +57,10 @@ namespace SeaBattle.View
         {
             try
             {
-                // Получение координат мыши
                 var mousePositionOnElement = e.GetPosition(computerFieldController.canvas);
                 var x = (int)(mousePositionOnElement.X / Cell.CellSize);
                 var y = (int)(mousePositionOnElement.Y / Cell.CellSize);
-                // Ход игрока
+
                 if (!_isGameOver
                     &&
                     _isPlayerCanShot
@@ -81,7 +80,7 @@ namespace SeaBattle.View
                     else
                         _isComputerCanShot = true;
                 }
-                // Ход компьютера
+
                 if (!_isGameOver && _isComputerCanShot)
                 {
                     _computerPlayer.AttackPlayer(_player, _computerPlayer.GetNextCell(), CellStatus.ComputerShot, CellStatus.ComputerShip);
@@ -104,13 +103,13 @@ namespace SeaBattle.View
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                QuietLogger.LogQ(ex);
             }
 
         }
 
         /// <summary>
-        /// Метод для определения победителя
+        /// Method to determine the winner
         /// </summary>
         private void TryFindWinner()
         {

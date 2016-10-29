@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace SeaBattle.ViewModel
 {
     /// <summary>
-    /// Класс модель
+    /// Model class
     /// </summary>
     public class MainViewModel
     {

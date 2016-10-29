@@ -18,7 +18,6 @@ namespace SeaBattle.View
 {
     /// <summary>
     /// Interaction logic for FieldControl.xaml
-    /// Пользовательский контроллер для отображения поля
     /// </summary>
     public partial class FieldControl : UserControl
     {

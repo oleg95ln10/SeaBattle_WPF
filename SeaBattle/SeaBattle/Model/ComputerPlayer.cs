@@ -8,14 +8,13 @@ using System.Threading.Tasks;
 namespace SeaBattle.Model
 {
     /// <summary>
-    /// Класс для реализации компьютерного игрока
-    /// Реализует класс для ИИ
+    /// Class implements a computer player
     /// </summary>
     public class ComputerPlayer : AbstractPlayer
     {
         private static Random _r;
-        private List<int> _shotMap;// Карта обстрела корабля противника
-        int _currentnumbOfCell;// Текущая ячейка из карты обстрела
+        private List<int> _shotMap;// Map of hit opponent ships
+        int _currentnumbOfCell;// Current cell from shot map
 
         public ComputerPlayer()
             :base()
@@ -61,7 +60,7 @@ namespace SeaBattle.Model
         }
 
         /// <summary>
-        /// Перемешать карту
+        /// Mix the map
         /// </summary>
         public void Shuffle()
         {
@@ -85,7 +84,7 @@ namespace SeaBattle.Model
         }
 
         /// <summary>
-        /// Извлечь следущую ячейку для обстрела
+        /// Get next cell for shot
         /// </summary>
         /// <returns></returns>
         public int GetNextCell()

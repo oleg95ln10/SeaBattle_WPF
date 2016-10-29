@@ -22,16 +22,21 @@ namespace SeaBattle.Model
 
         public static void ConfigureContainer()
         {
-            var builder = new ContainerBuilder();
+            try
+            {
+                var builder = new ContainerBuilder();
+                builder.RegisterType<PlayerRepository>()
+                    .As<IPlayerRepository>()
+                    .WithParameter("context", new PlayerContext());
 
-            builder.RegisterType<PlayerRepository>()
-                .As<IPlayerRepository>()
-                .WithParameter("context", new PlayerContext());
+                var container = builder.Build();
 
-            var container = builder.Build(); 
-
-            _repository = container.Resolve<IPlayerRepository>();
-
+                _repository = container.Resolve<IPlayerRepository>();
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
     }
 }

@@ -24,9 +24,7 @@ namespace SeaBattle.View
         {
             InitializeComponent();
 
-            var _pr = AutofacConfig.Repository;
-
-            playersGrid.ItemsSource = _pr.GetPlayers();
+            playersGrid.ItemsSource = AutofacConfig.Repository.GetPlayers();
         }
     }
 }

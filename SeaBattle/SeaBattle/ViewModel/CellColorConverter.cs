@@ -11,7 +11,7 @@ using System.Windows.Media;
 namespace SeaBattle.ViewModel
 {
     /// <summary>
-    /// Вспомогательный класс для удобства расцветки ячеек поля
+    /// Helper class for cells colorization
     /// </summary>
     public static class CellColorConverter
     {

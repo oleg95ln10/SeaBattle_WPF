@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace SeaBattle.Model
 {
     /// <summary>
-    /// Перечисление для отображения статуса ячейки
+    /// Enum for display the status of the cell
     /// </summary>
     public enum CellStatus
     {

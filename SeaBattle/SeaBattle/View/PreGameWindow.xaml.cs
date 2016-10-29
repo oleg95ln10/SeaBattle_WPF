@@ -58,7 +58,7 @@ namespace SeaBattle.View
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                QuietLogger.LogQ(ex);
             }
 
         }
@@ -99,7 +99,7 @@ namespace SeaBattle.View
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                QuietLogger.LogQ(ex);
             }
         }
 
@@ -114,7 +114,7 @@ namespace SeaBattle.View
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                QuietLogger.LogQ(ex);
             }
         }
 
@@ -131,7 +131,7 @@ namespace SeaBattle.View
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                QuietLogger.LogQ(ex);
             }
         }
 
@@ -145,7 +145,7 @@ namespace SeaBattle.View
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                QuietLogger.LogQ(ex);
             }
         }
 
@@ -158,7 +158,7 @@ namespace SeaBattle.View
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                QuietLogger.LogQ(ex);
             }
         }
 
@@ -171,7 +171,7 @@ namespace SeaBattle.View
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                QuietLogger.LogQ(ex);
             }
         }
 
@@ -185,7 +185,7 @@ namespace SeaBattle.View
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                QuietLogger.LogQ(ex);
             }
         }
 
@@ -199,7 +199,7 @@ namespace SeaBattle.View
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                QuietLogger.LogQ(ex);
             }
         }
 
@@ -223,7 +223,7 @@ namespace SeaBattle.View
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                QuietLogger.LogQ(ex);
             }
         }
 
@@ -237,7 +237,7 @@ namespace SeaBattle.View
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                QuietLogger.LogQ(ex);
             }
         }
 
@@ -255,7 +255,7 @@ namespace SeaBattle.View
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                QuietLogger.LogQ(ex);
             }
         }
 
@@ -276,7 +276,7 @@ namespace SeaBattle.View
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                QuietLogger.LogQ(ex);
             }
         }
     }

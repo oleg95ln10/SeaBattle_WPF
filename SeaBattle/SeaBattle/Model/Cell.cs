@@ -8,7 +8,7 @@ using System.Windows;
 namespace SeaBattle.Model
 {
     /// <summary>
-    /// Класс для описания ячейки поля
+    /// Class implements the cell of field
     /// </summary>
     public class Cell
     {

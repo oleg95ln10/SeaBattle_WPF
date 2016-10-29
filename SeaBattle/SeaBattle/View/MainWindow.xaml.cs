@@ -46,7 +46,7 @@ namespace SeaBattle
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                QuietLogger.LogQ(ex);
             }
         }
 
