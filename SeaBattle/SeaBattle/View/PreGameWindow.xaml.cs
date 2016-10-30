@@ -16,17 +16,17 @@ namespace SeaBattle.View
     /// </summary>
     public partial class PreGameWindow : Window
     {
-        private MainViewModel _model;// Модель из шлавного окна
-        private bool _isCanmove;// Может ли игрок ходить 
-        private int[] _shipArray;// Массив кораблей
-        private bool _isShipCanPlace;// Можно ли поставить корабль
-        private int _currentShip;// Длина текущего корабля
-        private Point _mousePosition;// Позиция мыши
-        private Point _zeroShipPosition;// Начальное положение кнопки "корабля"
-        private ShipDirection _shipDirection;// Направление корабля
-        private MainWindow _mainWindow;// Главное окно для возможного возврата
-        private bool _isUsePlayerMods;// Использовать ли пользовательские моды
-        private string _fileModeName;// Имя файла с пользовательским модом
+        private MainViewModel _model;// Model frm main window
+        private bool _isCanmove;// Is can player move
+        private int[] _shipArray;// Ship array
+        private bool _isShipCanPlace;// Is ship can be placed
+        private int _currentShip;// Current ship lenght
+        private Point _mousePosition;// Mouse pos
+        private Point _zeroShipPosition;// "ship" button lenght
+        private ShipDirection _shipDirection;// Current ship direction
+        private MainWindow _mainWindow;// Main window
+        private bool _isUsePlayerMods;// Is want we use mods
+        private string _fileModeName;// user's mode filename
         private bool _isStartGame;
         public PreGameWindow(MainWindow mainWindow)
         {

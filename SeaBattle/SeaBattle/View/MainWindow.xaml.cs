@@ -29,6 +29,7 @@ namespace SeaBattle
         {
             InitializeComponent();
             AutofacConfig.ConfigureContainer();
+
             var v = Directory.GetParent(Directory.GetParent(Directory.GetCurrentDirectory()).ToString()).ToString().Replace("/", "//");
             AppDomain.CurrentDomain.SetData("DataDirectory", v);
         }
