@@ -19,7 +19,6 @@ namespace SeaBattle.ViewModel
         {
             _firstPlayer = new Player();
             _computerPlayer = new ComputerPlayer();
-            AppDomain.CurrentDomain.SetData("DataDirectory", Directory.GetCurrentDirectory());
         }
 
         public Player FirstPlayer

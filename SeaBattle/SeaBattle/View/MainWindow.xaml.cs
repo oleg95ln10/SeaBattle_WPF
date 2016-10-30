@@ -3,6 +3,7 @@ using SeaBattle.View;
 using SeaBattle.ViewModel;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,6 +29,8 @@ namespace SeaBattle
         {
             InitializeComponent();
             AutofacConfig.ConfigureContainer();
+            var v = Directory.GetParent(Directory.GetParent(Directory.GetCurrentDirectory()).ToString()).ToString().Replace("/", "//");
+            AppDomain.CurrentDomain.SetData("DataDirectory", v);
         }
         public MainViewModel Model
         {

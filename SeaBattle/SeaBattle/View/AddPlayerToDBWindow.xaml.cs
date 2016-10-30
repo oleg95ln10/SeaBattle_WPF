@@ -48,7 +48,6 @@ namespace SeaBattle.View
 
         private void Button_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-
             try
             {
                 if (playerNameTextbox.Text != null)
