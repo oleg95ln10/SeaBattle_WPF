@@ -56,6 +56,7 @@ namespace SeaBattle.View
 
                     DbPlayer pl = new DbPlayer();
                     pl.Name = playerNameTextbox.Text;
+                    pl.Score = _player.Score;
                     AutofacConfig.Repository.AddPlayer(pl);
                 }
             }

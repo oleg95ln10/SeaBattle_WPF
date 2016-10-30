@@ -5,7 +5,9 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Reflection;
 using SeaBattle.ViewModel;
+using System.IO;
 
 namespace SeaBattle
 {
@@ -13,6 +15,7 @@ namespace SeaBattle
     /// Interaction logic for App.xaml
     /// </summary>
     public partial class App : Application
-    {
+    {     
+
     }
 }
